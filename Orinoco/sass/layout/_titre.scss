@@ -1,0 +1,10 @@
+﻿h1 {
+    font-size: $fontSizeH1;
+    margin: auto;
+    letter-spacing: 3px;
+
+    & a {
+        text-decoration: none;
+        color: $font-color;
+    }
+}

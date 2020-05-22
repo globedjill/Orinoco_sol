@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../style.css" />
+    <meta charset="utf-8" />
+    <script src="https://kit.fontawesome.com/8ee02d9cbc.js" crossorigin="anonymous"></script>
+    <title>Orinoco</title>
+</head>
+
+<body>
+    <header>
+        <div class="titre">
+            <i class="fas fa-shopping-cart"></i>
+            <h1><a href="../index.html">Orinoco</a></h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Les produits</a></li>
+                <li id="panier">Mon panier</li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <form method="post" action='traitement.php'>
+            <div class="row">
+                <label for='nom'>Nom :</label>
+                <div class="column">
+                    <input type='text' name="nom" id="nom" required maxlength='20' />
+                    <span id='nom_manquant'></span>
+                </div>
+            </div>
+           
+            <div class="row">
+                <label for='prenom'>Prénom :</label>
+                <input type='text' name="prenom" id="prenom" required maxlength='20'/>
+            </div>
+            <div class="row">
+                <label for='mail'>E-mail :</label>
+                <input type='email' name='mail' id='mail' required />
+            </div>
+            <div class="row">
+                <label for='tel'>Téléphone :</label>
+                <input type='tel' name='tel' id='tel' required/>
+            </div>
+                <input type='submit' value='Envoyer' id="bouton_valid_form" />
+        </form>
+    </main>
+    <footer>
+        <h3>Nous Contacter</h3>
+        <h3>Nous suivre</h3>
+    </footer>
+</body>
+</html>
+<script src="../js/script.js" ></script>
+

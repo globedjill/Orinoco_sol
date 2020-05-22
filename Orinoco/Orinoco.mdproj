@@ -11,5 +11,12 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="sass\main.scss" />
+    <None Include="sass\layout\_titre.scss" />
+    <None Include="sass\layout\_bal_gen.scss" />
+    <None Include="style.css" />
+    <None Include="sass\layout\_class.scss" />
+    <None Include="js\script.js" />
+    <None Include="html\ours.html" />
+    <None Include="sass\layout\_form.less" />
   </ItemGroup>
 </Project>

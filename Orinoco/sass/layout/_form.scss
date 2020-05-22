@@ -1,0 +1,12 @@
+﻿form {
+    display:flex;
+    flex-direction:column;
+    & label{
+        font-size:1.5em;
+        padding-right:20px;
+    }
+    & input{
+        font-size:1.5em;
+    }
+}
+

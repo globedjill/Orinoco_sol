@@ -1,0 +1,147 @@
+body {
+  background: #fbf6fa;
+  margin: auto;
+}
+
+header {
+  position: fixed;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: #f5e8f1;
+  margin: auto;
+  padding-top: 20px;
+  border-bottom: 4px solid rgba(32, 14, 27, 0.2);
+}
+
+footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background: #f5e8f1;
+  margin: auto;
+  margin-top: 30px;
+  border-top: 4px solid rgba(32, 14, 27, 0.2);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+nav ul {
+  display: flex;
+  flex-direction: row;
+}
+nav ul li {
+  margin: auto;
+  list-style: none;
+  padding: 0 20px;
+}
+
+i {
+  font-size: 4em;
+  padding-right: 20px;
+}
+
+main {
+  padding-top: 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+main article {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 20px;
+  box-shadow: 2px 2px 12px grey;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+main article picture {
+  width: 400px;
+  height: 400px;
+  margin: 0;
+}
+main article picture img {
+  margin: 0;
+  width: 400px;
+  height: 400px;
+}
+
+button {
+  margin: 3px;
+  padding: 4px 10px;
+  font-size: 1em;
+  border-radius: 50px;
+}
+
+canvas {
+  background: orange;
+}
+
+h1 {
+  font-size: 4em;
+  margin: auto;
+  letter-spacing: 3px;
+}
+h1 a {
+  text-decoration: none;
+  color: black;
+}
+
+.titre {
+  display: flex;
+  flex-direction: row;
+}
+
+.description {
+  padding-right: 30px;
+}
+
+.mep {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  padding: 0 10px 10px 10px;
+  box-sizing: border-box;
+}
+
+.bouton {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  margin: 10px 0;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: baseline;
+  margin: auto;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+form label {
+  font-size: 1.5em;
+  padding-right: 20px;
+}
+form input {
+  font-size: 1.5em;
+}
+
+/*# sourceMappingURL=style.css.map */
