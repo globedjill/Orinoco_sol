@@ -1,68 +1,63 @@
-﻿/*Formulaire*/ 
-/*var valid = document.getElementById('bouton_valid_form');
-var nom = document.getElementById('nom');
-var nom_manquant = document.getElementById('nom_manquant');
-var nom_valid = /^[a-zA-ZéèïîÉÈÎÏ][a-zéèêçîï]+([-'\s][a-zA-ZéèïîÉÈÎÏ][a-zéèêçîï]+)?/;
-
-valid.addEventListener('click', validation);
-
-function validation(event) {
-    if (nom.validity.valueMissing) {
-        event.preventDefault();
-        nom_manquant.textContent = ' veuiller renseigner un NOM';
-        nom_manquant.style.color = 'red';
-        nom.style.backgroundColor = 'red';
-
-    } else if (nom_valid.test(nom.value) == false) {
-        event.preventDefault();
-        nom_manquant.textContent = 'Veuiller renseigner un nom correct';
-        nom_manquant.style.color = 'red';
-        nom.style.backgroundColor = 'orange';
-    } else {
-
-    }
-}*/
-
-/*Canvas*/
-
-var canvas = document.getElementById('canvas1');
-var contexte = canvas.getContext('2d');
-
-contexte.beginPath();
-contexte.lineWidth = '1';
-contexte.strokeStyle = 'red';
-contexte.moveTo(100, 50);
-contexte.lineTo(300, 150);
-contexte.stroke();
-
-contexte.beginPath();
-contexte.lineWidth = '1';
-contexte.strokeStyle = 'green';
-contexte.moveTo(50, 100);
-contexte.lineTo(300, 150);
-contexte.stroke();
-
-contexte.beginPath();
-contexte.lineWidth = '1';
-contexte.strokeStyle = 'white';
-contexte.moveTo(50, 100);
-contexte.lineTo(100, 50);
-contexte.stroke();
-
-contexte.beginPath();
-contexte.lineWidth = '5';
-contexte.strokeStyle = 'pink';
-contexte.arc(75, 100, 50, 0, Math.PI);
-contexte.stroke();
-
-contexte.beginPath();
-contexte.lineWidth = '5';
-contexte.fillStyle = 'violet';
-contexte.arc(200, 100, 50, 0, 2 * Math.PI);
-contexte.fill();
+﻿function ajaxGet(url, callback) {
+    var req = new XMLHttpRequest();
+    req.open("GET", url);
+    req.addEventListener('load', function () {
+        if (req.status >= 200 && req.status < 400) {
+            callback(req.responseText);
+        } else {
+            console.error(req.status + '' + req.statusText + ''+ url);
+        }
+    });
+    req.addEventListener('error', function () {
+        console.error("Erreur reseaux avec l'URL"+ url);
+    });
+    req.send(null);
+}
 
 
+ajaxGet("http://localhost:3000/api/teddies", function (reponse) {
+    var table = JSON.parse(reponse);
+    table.forEach(function (tableau) {
+        const article = document.createElement('article');
+        const picture = document.createElement('picture');
+        const img = document.createElement('img');
+        img.src = tableau.imageUrl;
+        const mep = document.createElement('div');
+        mep.className = "mep";
+        const description = document.createElement('div');
+        description.className = 'description';
+        const h2 = document.createElement('h2');
+        const para = document.createElement('p');
+        para.textContent = 'Prix: ';
+        const span = document.createElement('span');
+        span.textContent = tableau.price + " €";
+        span.className = 'prix';
+        const mepBoutton = document.createElement('div');
+        mepBoutton.className = 'bouton';
+        const boutton = document.createElement('button');
+        boutton.className = 'ajouterAuPanier';
+        boutton.textContent = 'Ajouter au Panier';
+        const boutton2 = document.createElement('a');
+        boutton2.className = 'plusDinfo';
+        boutton2.href = "pageProduit.html";
+        boutton2.textContent = "Voir l'article";
 
+        //Insertion dans la page 
+        const main = document.querySelector('main');
+        main.appendChild(article);
+        article.appendChild(picture);
+        picture.appendChild(img);
+        article.appendChild(mep);
+        mep.appendChild(description);
+        description.appendChild(h2);
+        h2.appendChild(para);
+        para.appendChild(span);
+        mep.appendChild(mepBoutton);
+        mepBoutton.appendChild(boutton);
+        mepBoutton.appendChild(boutton2);
+    });
+    console.log(table);
+});
 
 
 

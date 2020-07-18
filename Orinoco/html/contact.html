@@ -22,27 +22,40 @@
     </header>
     <main>
         <form method="post" action='traitement.php'>
-            <div class="row">
-                <label for='nom'>Nom :</label>
-                <div class="column">
-                    <input type='text' name="nom" id="nom" required maxlength='20' />
-                    <span id='nom_manquant'></span>
+            <div id="mepForm">
+                <fieldset>
+                    <legend>Coordonées</legend>
+                    <div class="row">
+                        <label for='nom'>Nom</label>
+                        <div class="column">
+                            <input type='text' value='Ajouter un nom' name="nom" id="nom" required maxlength='20' />
+                            <span id='nom_manquant'></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <label for='prenom'>Prénom</label>
+                        <div class="column">
+                            <input type='text' value='Ajouter un prénom' name="prenom" id="prenom" required maxlength='20' />
+                            <span id='prenom_manquant'></span>
+                        </div>
+                    </div>
+
+                        <div class="row">
+                            <label for='mail'>E-mail</label>
+                            <input type='email' name='mail' id='mail' required />
+                        </div>
+
+                        <div class="row">
+                            <label for='tel'>Téléphone</label>
+                            <input type='tel' name='tel' id='tel' />
+                        </div>
+                </fieldset>
+                <div class="zone_valid">
+                    <p id='compteur'></p>
                 </div>
             </div>
-           
-            <div class="row">
-                <label for='prenom'>Prénom :</label>
-                <input type='text' name="prenom" id="prenom" required maxlength='20'/>
-            </div>
-            <div class="row">
-                <label for='mail'>E-mail :</label>
-                <input type='email' name='mail' id='mail' required />
-            </div>
-            <div class="row">
-                <label for='tel'>Téléphone :</label>
-                <input type='tel' name='tel' id='tel' required/>
-            </div>
-                <input type='submit' value='Envoyer' id="bouton_valid_form" />
+            <input type='submit' value='Envoyer' id="bouton_valid_form" />
         </form>
     </main>
     <footer>

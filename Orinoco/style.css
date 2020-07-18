@@ -25,7 +25,6 @@ footer {
   margin: auto;
   margin-top: 30px;
   border-top: 4px solid rgba(32, 14, 27, 0.2);
-  position: fixed;
   bottom: 0;
   width: 100%;
 }
@@ -57,9 +56,16 @@ main article {
   flex-direction: column;
   justify-content: flex-start;
   margin: 20px;
+  margin-bottom: 100px;
   box-shadow: 2px 2px 12px grey;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
+}
+main article a {
+  margin: 3px;
+  padding: 4px 10px;
+  font-size: 1em;
+  border-radius: 50px;
 }
 main article picture {
   width: 400px;
@@ -77,10 +83,6 @@ button {
   padding: 4px 10px;
   font-size: 1em;
   border-radius: 50px;
-}
-
-canvas {
-  background: orange;
 }
 
 h1 {
@@ -117,19 +119,10 @@ h1 a {
   justify-content: center;
 }
 
-.row {
-  display: flex;
-  justify-content: flex-end;
-  align-items: baseline;
-  margin: 10px 0;
-}
-
-.column {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: baseline;
-  margin: auto;
+.plusDinfo {
+  border: 1px solid black;
+  text-align: center;
+  text-decoration: none;
 }
 
 form {
@@ -142,6 +135,34 @@ form label {
 }
 form input {
   font-size: 1.5em;
+  color: grey;
+}
+form #mepForm {
+  display: flex;
+  flex-direction: row;
+}
+
+fieldset {
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+.row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  margin: 10px 0;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+#bouton_valid_form {
+  font-size: 2em;
+  padding: 10px;
 }
 
 /*# sourceMappingURL=style.css.map */
