@@ -18,15 +18,12 @@
 ajaxGet("http://localhost:3000/api/teddies", function (reponse) {
     var table = JSON.parse(reponse);
     console.log(table);
-    for (var i = 0; i < table.length; i++) {
-        var id = table[i]._id;
-        console.log(id);
-    }
-    table.forEach(function (tableau) {
+   
+    table.forEach(function (element) {
         const article = document.createElement('article');
         const picture = document.createElement('picture');
         const img = document.createElement('img');
-        img.src = tableau.imageUrl;
+        img.src = element.imageUrl;
         const mep = document.createElement('div');
         mep.className = "mep";
         const description = document.createElement('div');
@@ -35,16 +32,16 @@ ajaxGet("http://localhost:3000/api/teddies", function (reponse) {
         const para = document.createElement('p');
         para.textContent = 'Prix: ';
         const span = document.createElement('span');
-        span.textContent = tableau.price + " €";
+        span.textContent = element.price + " €";
         span.className = 'prix';
         const mepBoutton = document.createElement('div');
         mepBoutton.className = 'bouton';
-        const boutton = document.createElement('button');
-        boutton.className = 'ajouterAuPanier';
+        const boutton = document.createElement('a');
+        boutton.className = 'plusDinfo';
         boutton.textContent = 'Ajouter au Panier';
         const boutton2 = document.createElement('a');
         boutton2.className = "plusDinfo";
-        boutton2.href = "pageProduit.html?"+id;
+        boutton2.href = "pageProduit.html?"+ element._id;
         boutton2.textContent = "Voir l'article";
 
         //Insertion dans la page 

@@ -4,23 +4,36 @@
 }
 .description {
     padding-right: 30px;
+    padding-left:30px;
 }
 .mep {
     display: flex;
     flex-direction: row;
-    background-color: white;
+    background-color: $backGroundColor2;
     padding: 0 10px 10px 10px;
-   
     box-sizing: border-box;
 }
-.bouton{
-    flex-grow:1;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
+
+.boutton {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-right: 30px;
+}
+.bouton {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 .plusDinfo {
-    border: 1px solid black;
+    margin-top: 8px;
+    padding: 4px;
+    width: 130px;
+    background-color: white;
     text-align: center;
     text-decoration: none;
+    border: 2px solid $backGroundColor;
+}
+.afficher{
+    flex-direction:row;
 }
