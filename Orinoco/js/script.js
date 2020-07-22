@@ -14,9 +14,14 @@
     req.send(null);
 }
 
-
+//affichage de chaque teddys dynamiquement dans la page ours.html
 ajaxGet("http://localhost:3000/api/teddies", function (reponse) {
     var table = JSON.parse(reponse);
+    console.log(table);
+    for (var i = 0; i < table.length; i++) {
+        var id = table[i]._id;
+        console.log(id);
+    }
     table.forEach(function (tableau) {
         const article = document.createElement('article');
         const picture = document.createElement('picture');
@@ -38,8 +43,8 @@ ajaxGet("http://localhost:3000/api/teddies", function (reponse) {
         boutton.className = 'ajouterAuPanier';
         boutton.textContent = 'Ajouter au Panier';
         const boutton2 = document.createElement('a');
-        boutton2.className = 'plusDinfo';
-        boutton2.href = "pageProduit.html";
+        boutton2.className = "plusDinfo";
+        boutton2.href = "pageProduit.html?"+id;
         boutton2.textContent = "Voir l'article";
 
         //Insertion dans la page 
@@ -56,8 +61,4 @@ ajaxGet("http://localhost:3000/api/teddies", function (reponse) {
         mepBoutton.appendChild(boutton);
         mepBoutton.appendChild(boutton2);
     });
-    console.log(table);
 });
-
-
-

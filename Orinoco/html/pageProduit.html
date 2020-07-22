@@ -10,11 +10,18 @@
     <header>
         <div class="titre">
             <i class="fas fa-shopping-cart"></i>
-            <h1><a href="../index.html">Orinoco</a></h1>
+            <h1><a href="../../index.html">Orinoco</a></h1>
         </div>
         <nav>
             <ul>
-                <li><a href="../index.html">Les produits</a></li>
+                <li id="lesProduits">
+                    <a href="../../index.html">Les produits</a>
+                    <div id="mepUl">
+                        <p><a href="ours.html">Les Ours</a></p>
+                        <p><a href="camera.html">Les cameras</a></p>
+                        <p><a href="meuble.html">Les meubles</a></p>
+                    </div>
+                </li>
                 <li id="panier">Mon panier</li>
             </ul>
         </nav>
@@ -34,14 +41,12 @@
                         <label>Couleur</label>
                         <select class="select">
                             <option>--Choisir la couleur--</option>
-                            <option>Noir</option>
-                            <option>Brun</option>
-                            <option>Blanc</option>
+                           
                         </select>
                     </div>
                     <div class='row'>
                         <label>Quantité</label>
-                        <input type='number'class="number" value='1'>
+                        <input type='number' class="number" value='1'>
                     </div>
                 </div>
             </div>
@@ -51,7 +56,9 @@
         <h3><a href="contact.html">Nous Contacter</a></h3>
         <h3>Nous suivre</h3>
     </footer>
+
+    <script src="../js/pageDynamique.js"></script>
+    <script src="../js/menuDeroulant.js"></script>
 </body>
 </html>
-<script src="../js/pageDynamique.js"></script>
 

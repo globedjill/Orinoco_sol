@@ -1,3 +1,13 @@
+@keyframes nav {
+  0% {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
 body {
   background: #fbf6fa;
   margin: auto;
@@ -34,9 +44,25 @@ nav ul {
   flex-direction: row;
 }
 nav ul li {
-  margin: auto;
   list-style: none;
+  position: relative;
+  margin: auto;
   padding: 0 20px;
+}
+nav ul li #mepUl {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  margin-top: 5px;
+  padding: 0;
+}
+nav ul li #mepUl p {
+  opacity: 0;
+  background-color: #c300e6;
+  margin-top: 3px;
+  margin: 0;
+  width: 90px;
 }
 
 i {

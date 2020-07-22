@@ -20,5 +20,7 @@
     <None Include="sass\layout\_form.less" />
     <None Include="js\pageDynamique.js" />
     <None Include="html\pageProduit.html" />
+    <None Include="js\menuDeroulant.js" />
+    <None Include="sass\utils\_keyframes.scss" />
   </ItemGroup>
 </Project>
