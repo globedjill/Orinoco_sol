@@ -22,5 +22,6 @@
     <None Include="html\pageProduit.html" />
     <None Include="js\menuDeroulant.js" />
     <None Include="sass\utils\_keyframes.scss" />
+    <None Include="js\panier.js" />
   </ItemGroup>
 </Project>

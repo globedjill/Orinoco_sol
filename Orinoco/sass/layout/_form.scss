@@ -20,21 +20,7 @@ fieldset{
     padding:30px;
     margin-bottom:30px;
 }
-.row {
-    display: flex;
-    justify-content: flex-end;
-    align-items: baseline;
-    margin: 10px 0;
-}
 
-.column {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-}
-
-span{
-}
 
 #bouton_valid_form {
     font-size: $fontSize_boutton;

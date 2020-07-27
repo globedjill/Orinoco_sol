@@ -31,9 +31,10 @@ ajaxGet("http://localhost:3000/api/teddies", function (reponse) {
     div.className = 'column';
     var div2 = document.createElement('div');
     div2.className = 'description';
-    var h3 = document.createElement('h3');
+    var description = document.createElement('p');
     var p = document.createElement('p');
     p.textContent = 'Prix: ';
+    p.id = 'prix';
     var span = document.createElement('span');
     var div3 = document.createElement('div');
     div3.className = 'boutton';
@@ -51,7 +52,18 @@ ajaxGet("http://localhost:3000/api/teddies", function (reponse) {
     var input = document.createElement('input');
     input.type = 'number';
     input.className = 'number';
+    input.min = '1';
+    input.max = "10";
     input.value = '1';
+    var div6 = document.createElement('div');
+    div6.className = 'row';
+    var bouttonAjouterAuPanier = document.createElement('button');
+    bouttonAjouterAuPanier.textContent = "Ajouter au panier";
+    var bouttonContinuerMesAchats = document.createElement('a');
+    bouttonContinuerMesAchats.href = "ours.html";
+    bouttonContinuerMesAchats.title = 'retour';
+    var bouttonReturn = document.createElement('i');
+    bouttonReturn.className = 'fas fa-undo-alt';
 
     main.appendChild(article);
     article.appendChild(picture);
@@ -59,9 +71,10 @@ ajaxGet("http://localhost:3000/api/teddies", function (reponse) {
     article.appendChild(div);
     div.appendChild(div2);
     div2.appendChild(h2);
-    div2.appendChild(h3);
+    div2.appendChild(description);
     div2.appendChild(p);
     p.appendChild(span);
+
     div.appendChild(div3);
     div3.appendChild(div4);
     div4.appendChild(label);
@@ -69,7 +82,12 @@ ajaxGet("http://localhost:3000/api/teddies", function (reponse) {
     select.appendChild(option);
     div3.appendChild(div5);
     div5.appendChild(label2);
-    label2.appendChild(input);
+    div5.appendChild(input);
+
+    div.appendChild(div6);
+    div6.appendChild(bouttonAjouterAuPanier);
+    div6.appendChild(bouttonContinuerMesAchats);
+    bouttonContinuerMesAchats.appendChild(bouttonReturn);
 
     for (var i = 0; i < table.length; i++) {
         var tableId = table[i]._id;
@@ -78,7 +96,7 @@ ajaxGet("http://localhost:3000/api/teddies", function (reponse) {
             img.src = result.imageUrl;
             h2.textContent = result.name;
             span.textContent = result.price + " €";
-            h3.textContent = result.description;
+            description.textContent = result.description;
 
             for (var i = 0; i < result.colors.length; i++) {
                 var creer = document.createElement('option');
@@ -86,6 +104,20 @@ ajaxGet("http://localhost:3000/api/teddies", function (reponse) {
                 select.appendChild(creer);
             }
         }
-    }   
+    }
+
+    bouttonAjouterAuPanier.addEventListener('click', function () {
+        var quantite = input.value;
+        var price = parseInt(document.querySelector('span').textContent);
+        var total = quantite * price;
+        var couleur = select.value;
+
+        localStorage.setItem('qtt', quantite);
+        localStorage.setItem('prix', price);
+        localStorage.setItem('total', total);
+        localStorage.setItem('couleur', couleur);
+
+    });
 });
+
 
