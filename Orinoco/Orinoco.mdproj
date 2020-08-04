@@ -23,5 +23,6 @@
     <None Include="js\menuDeroulant.js" />
     <None Include="sass\utils\_keyframes.scss" />
     <None Include="js\panier.js" />
+    <None Include="js\ajaxGet.js" />
   </ItemGroup>
 </Project>

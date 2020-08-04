@@ -13,10 +13,9 @@
     });
     req.send(null);
 }
-
+//recuperation et affichage des ours
 ajaxGet("http://localhost:3000/api/teddies", function (reponse) {
     var table = JSON.parse(reponse);
-    console.log(table);
     const regex = /\?/;
     var recherche = window.location.search.replace(regex, "");
 
@@ -54,7 +53,7 @@ ajaxGet("http://localhost:3000/api/teddies", function (reponse) {
     input.className = 'number';
     input.min = '1';
     input.max = "10";
-    input.value = '1';
+    input.value = "1";
     var div6 = document.createElement('div');
     div6.className = 'row';
     var bouttonAjouterAuPanier = document.createElement('button');
@@ -105,18 +104,18 @@ ajaxGet("http://localhost:3000/api/teddies", function (reponse) {
             }
         }
     }
+    
 
     bouttonAjouterAuPanier.addEventListener('click', function () {
-        var quantite = input.value;
-        var price = parseInt(document.querySelector('span').textContent);
-        var total = quantite * price;
-        var couleur = select.value;
 
-        localStorage.setItem('qtt', quantite);
-        localStorage.setItem('prix', price);
-        localStorage.setItem('total', total);
-        localStorage.setItem('couleur', couleur);
-
+        class oursPanier {
+            constructor(quantite,coul) {
+                this.quantite = input.value;
+                this.coul = select.value;
+            }
+        }
+        var nouveauPanier = new oursPanier();
+        var loc = localStorage.setItem('ours', JSON.stringify(nouveauPanier));
     });
 });
 
