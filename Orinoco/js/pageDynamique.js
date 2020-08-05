@@ -104,18 +104,24 @@ ajaxGet("http://localhost:3000/api/teddies", function (reponse) {
             }
         }
     }
-    
-
     bouttonAjouterAuPanier.addEventListener('click', function () {
-
         class oursPanier {
-            constructor(quantite,coul) {
+            constructor(quantite, coul, image, nomTeddy) {
+                this.nomTeddy = h2.textContent;
+                this.image = img.src;
                 this.quantite = input.value;
+                this.prix = result.price;
                 this.coul = select.value;
             }
         }
+
         var nouveauPanier = new oursPanier();
         var loc = localStorage.setItem('ours', JSON.stringify(nouveauPanier));
+        if (confirm('Aler vers le panier')) {
+            bouttonAjouterAuPanier.onclick = window.location.href = 'panier.html';
+        } else {
+            bouttonAjouterAuPanier.onclick = window.location.href = 'ours.html';
+        };
     });
 });
 

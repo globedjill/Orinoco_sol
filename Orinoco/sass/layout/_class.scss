@@ -45,7 +45,7 @@
 
 .row {
     display: flex;
-    align-items: baseline;
+    flex-direction:row;
     margin: 10px 0;
 }
 
@@ -57,4 +57,64 @@
 #prix{
     font-size : 1.5em;
     font-weight:bold;
+}
+
+.imagePanier{
+    display:flex;
+    height:150px;
+}
+.mepForm {
+    border: 1px solid black;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    justify-content:stretch;
+}
+.divMepForm{
+    flex-grow:1;
+    margin:20px;
+}
+.mepDivPanier {
+    margin: 0;
+    padding: 0;
+}
+.mepQtt{
+    width:40px;
+}
+.mepDivQuant {
+    padding-right:40px;
+    & label {
+        border: 1px solid black;
+        border-right: none;
+        display: flex;
+        padding: 5px 0px 5px 15px;
+        border-radius: 10px 0 0 10px;
+        width: 50px;
+        background-color: $backGroundColorBoutton;
+    }
+}
+.mepCoul {
+    font-size: 1.5em;
+    padding-right: 40px;
+    padding:0;
+    margin:0;
+    display:flex;
+    align-items:center;
+}
+.bouttonSupprPanier {
+    border:none;
+    background:none;
+    font-size:1em;
+    &:hover{
+        color:violet;
+        cursor:pointer;
+    }
+}
+.divPrix {
+    margin: 20px;
+
+    & p {
+        font-size: 1.5em;
+        padding-left:50px;
+    }
 }
