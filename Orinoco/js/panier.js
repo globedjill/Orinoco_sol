@@ -19,8 +19,34 @@ ajaxGet("http://localhost:3000/api/teddies", function (reponse) {
 
     const main = document.querySelector('main');
     main.className = 'column';
+        //titre page
     const titrePanier = document.createElement('h2');
     titrePanier.textContent = 'Votre panier';
+        //ligne legende
+    const divLegende = document.createElement('div');
+    divLegende.className = 'row divLegende';
+
+    const divCheckSupr = document.createElement('div');// div 
+    divCheckSupr.className = "row divCheckSupr";
+    const labelSupr = document.createElement('label');// label checkbox
+    labelSupr.className = 'labelSupr';
+    labelSupr.name = 'supprim';
+    labelSupr.textContent = 'Supprimer';
+    const supprimer = document.createElement('input');// checkbox supprimer
+    supprimer.name = 'supprim';
+    supprimer.type = 'checkbox';
+    supprimer.className = 'buttonSuppr';
+    supprimer.textContent = 'supprimer';
+    const divParaPrix = document.createElement('div');// div prix
+    divParaPrix.className = 'row divParaPrix';
+    const pPrixTeddy = document.createElement('p'); // para Prix init 
+    pPrixTeddy.textContent = 'Prix';
+    pPrixTeddy.className = 'pPrixTeddy';
+    const pSsTotalTeddy = document.createElement('p');// para Sous-total prix 
+    pSsTotalTeddy.textContent = 'Sous-Total';
+    pSsTotalTeddy.className = 'pSsTotalTeddy';
+
+        //creation des elements de reference
     const form = document.createElement('form');
     form.className = 'row mepForm';
     form.method = 'post';
@@ -56,10 +82,10 @@ ajaxGet("http://localhost:3000/api/teddies", function (reponse) {
     const quantiteLabel = document.createElement('label');
     quantiteLabel.textContent = 'Qté ';
     const divBouttonQtePrix = document.createElement('div');
-    divBouttonQtePrix.className = 'row';
-    const bouttonSupprimer = document.createElement('button');
+    divBouttonQtePrix.className = 'row divBouttonQtePrix';
+    const bouttonSupprimer = document.createElement('input');
+    bouttonSupprimer.type = 'checkbox';
     bouttonSupprimer.className = 'bouttonSupprPanier';
-    bouttonSupprimer.textContent = 'Supprimer';
 
     const divPrix = document.createElement('div');
     divPrix.className = 'row divPrix';
@@ -72,19 +98,25 @@ ajaxGet("http://localhost:3000/api/teddies", function (reponse) {
 
         //Ajout des elements
     main.appendChild(titrePanier);
+    main.appendChild(divLegende);
+    divLegende.appendChild(divCheckSupr);
+    divCheckSupr.appendChild(supprimer);
+    divCheckSupr.appendChild(labelSupr);
+    divLegende.appendChild(divParaPrix);
+    divParaPrix.appendChild(pPrixTeddy);
+    divParaPrix.appendChild(pSsTotalTeddy);
     main.appendChild(form);
+    form.appendChild(bouttonSupprimer);
     form.appendChild(img);
     form.appendChild(divMepForm);
     divMepForm.appendChild(divNomCouleur);
     divNomCouleur.appendChild(nom);
     divNomCouleur.appendChild(coul);
-    form.appendChild(divPrix);
-    divPrix.appendChild(affichePrix);
-    divPrix.appendChild(sousTotal);
     divMepForm.appendChild(divBouttonQtePrix);
     divBouttonQtePrix.appendChild(divQuant);
     divQuant.appendChild(quantiteLabel);
     divQuant.appendChild(quantiteType);
-    divBouttonQtePrix.appendChild(bouttonSupprimer);
-   
+    divBouttonQtePrix.appendChild(divPrix);
+    divPrix.appendChild(affichePrix);
+    divPrix.appendChild(sousTotal);
 });

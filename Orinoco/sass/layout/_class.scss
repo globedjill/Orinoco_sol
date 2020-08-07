@@ -81,8 +81,13 @@
 .mepQtt{
     width:40px;
 }
+.divBouttonQtePrix{
+    height:70px;
+}
 .mepDivQuant {
-    padding-right:40px;
+    padding-right: 50px;
+    height: 30px;
+
     & label {
         border: 1px solid black;
         border-right: none;
@@ -102,13 +107,8 @@
     align-items:center;
 }
 .bouttonSupprPanier {
-    border:none;
-    background:none;
-    font-size:1em;
-    &:hover{
-        color:violet;
-        cursor:pointer;
-    }
+    width:10px;
+    height:10px;
 }
 .divPrix {
     margin: 20px;
@@ -116,5 +116,20 @@
     & p {
         font-size: 1.5em;
         padding-left:50px;
+    }
+}
+.divCheckSupr {
+    display: flex;
+    flex-grow: 1;
+}
+.divLegende{
+    margin:0;
+    padding:0;
+    & divCheckSupr{
+    margin:0;
+    padding:0;
+    }
+    & divParaPrix{
+        align-content:center;
     }
 }

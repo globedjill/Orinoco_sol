@@ -14,11 +14,11 @@
     req.send(null);
 }
 //recuperation et affichage des ours
-ajaxGet("http://localhost:3000/api/teddies", function (reponse) {
-    var table = JSON.parse(reponse);
-    const regex = /\?/;
-    var recherche = window.location.search.replace(regex, "");
+const regex = /\?/;
+var recherche = window.location.search.replace(regex, "");
 
+ajaxGet("http://localhost:3000/api/teddies/"+recherche, function (reponse) {
+    var table = JSON.parse(reponse);
     const main = document.querySelector('main');
 
     var article = document.createElement('article');
@@ -88,40 +88,46 @@ ajaxGet("http://localhost:3000/api/teddies", function (reponse) {
     div6.appendChild(bouttonContinuerMesAchats);
     bouttonContinuerMesAchats.appendChild(bouttonReturn);
 
-    for (var i = 0; i < table.length; i++) {
-        var tableId = table[i]._id;
-        var result = table[i];
-        if (recherche === tableId) {
-            img.src = result.imageUrl;
-            h2.textContent = result.name;
-            span.textContent = result.price + " €";
-            description.textContent = result.description;
+    img.src = table.imageUrl;
+    h2.textContent = table.name;
+    span.textContent = table.price + " €";
+    description.textContent = table.description;
 
-            for (var i = 0; i < result.colors.length; i++) {
-                var creer = document.createElement('option');
-                creer.textContent = result.colors[i];
-                select.appendChild(creer);
-            }
-        }
+    for (var i = 0; i < table.colors.length; i++) {
+        var creer = document.createElement('option');
+        creer.textContent = table.colors[i];
+        select.appendChild(creer);
     }
-    bouttonAjouterAuPanier.addEventListener('click', function () {
+
+    var locGet = [];
+
+    if (localStorage.getItem('ours')) {
+        locGet = JSON.parse(localStorage.getItem('ours'));
+    }
+
+    bouttonAjouterAuPanier.addEventListener('click', function () {  
         class oursPanier {
             constructor(quantite, coul, image, nomTeddy) {
                 this.nomTeddy = h2.textContent;
                 this.image = img.src;
                 this.quantite = input.value;
-                this.prix = result.price;
+                this.prix = table.price;
                 this.coul = select.value;
             }
         }
 
         var nouveauPanier = new oursPanier();
+
         var loc = localStorage.setItem('ours', JSON.stringify(nouveauPanier));
+        //creer une boucle sur locGET 
+        //...
+
+        locGet.push(nouveauPanier);
+        localStorage.setItem('ours', JSON.stringify(locGet));
         if (confirm('Aler vers le panier')) {
             bouttonAjouterAuPanier.onclick = window.location.href = 'panier.html';
-        } else {
-            bouttonAjouterAuPanier.onclick = window.location.href = 'ours.html';
         };
+        console.log(locGet);
     });
 });
 
