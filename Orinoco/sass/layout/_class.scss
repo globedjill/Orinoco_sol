@@ -64,60 +64,82 @@
     height:150px;
 }
 .mepForm {
-    border: 1px solid black;
     margin: 0;
     padding: 0;
     align-items: center;
-    justify-content:stretch;
-}
-.divMepForm{
-    flex-grow:1;
-    margin:20px;
-}
-.mepDivPanier {
-    margin: 0;
-    padding: 0;
-}
-.mepQtt{
-    width:40px;
-}
-.divBouttonQtePrix{
-    height:70px;
-}
-.mepDivQuant {
-    padding-right: 50px;
-    height: 30px;
+    justify-content: stretch;
 
-    & label {
-        border: 1px solid black;
-        border-right: none;
-        display: flex;
-        padding: 5px 0px 5px 15px;
-        border-radius: 10px 0 0 10px;
-        width: 50px;
-        background-color: $backGroundColorBoutton;
+    & article {
+        margin: 10px 0 10px 0;
+        padding: 10px;
+        width: 100%;
+
+        & .divMepForm {
+            flex-grow: 1;
+            margin: 20px;
+
+            & .mepDivPanier {
+                margin: 0;
+                padding: 0;
+
+                & .mepCoul {
+                    font-size: 1.5em;
+                    padding-right: 40px;
+                    padding: 0;
+                    margin: 0;
+                    display: flex;
+                    align-items: center;
+                }
+
+                & h3 {
+                }
+            }
+
+            & .divBouttonQtePrix {
+                margin:20px;
+
+                & .mepDivQuant {
+                    padding-right: 50px;
+                    flex-grow:1;
+
+                    & label {
+                        border: 1px solid black;
+                        border-right: none;
+                        display: flex;
+                        padding: 5px 0px 5px 15px;
+                        border-radius: 10px 0 0 10px;
+                        width: 50px;
+                        background-color: $backGroundColorBoutton;
+                    }
+
+                    & .mepQtt {
+                        width: 40px;
+                    }
+                }
+
+                & .divPrix {
+                    margin: 20px;
+
+                    & p {
+                        font-size: 1.5em;
+                        padding-left: 50px;
+                        margin:0;
+                    }
+                }
+            }
+        }
     }
 }
-.mepCoul {
-    font-size: 1.5em;
-    padding-right: 40px;
-    padding:0;
-    margin:0;
-    display:flex;
-    align-items:center;
-}
+
+
+
+
+
 .bouttonSupprPanier {
     width:10px;
     height:10px;
 }
-.divPrix {
-    margin: 20px;
 
-    & p {
-        font-size: 1.5em;
-        padding-left:50px;
-    }
-}
 .divCheckSupr {
     display: flex;
     flex-grow: 1;

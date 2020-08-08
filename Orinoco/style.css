@@ -218,36 +218,40 @@ h3 {
 }
 
 .mepForm {
-  border: 1px solid black;
   margin: 0;
   padding: 0;
   align-items: center;
   justify-content: stretch;
 }
-
-.divMepForm {
+.mepForm article {
+  margin: 10px 0 10px 0;
+  padding: 10px;
+  width: 100%;
+}
+.mepForm article .divMepForm {
   flex-grow: 1;
   margin: 20px;
 }
-
-.mepDivPanier {
+.mepForm article .divMepForm .mepDivPanier {
   margin: 0;
   padding: 0;
 }
-
-.mepQtt {
-  width: 40px;
+.mepForm article .divMepForm .mepDivPanier .mepCoul {
+  font-size: 1.5em;
+  padding-right: 40px;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
 }
-
-.divBouttonQtePrix {
-  height: 70px;
+.mepForm article .divMepForm .divBouttonQtePrix {
+  margin: 20px;
 }
-
-.mepDivQuant {
+.mepForm article .divMepForm .divBouttonQtePrix .mepDivQuant {
   padding-right: 50px;
-  height: 30px;
+  flex-grow: 1;
 }
-.mepDivQuant label {
+.mepForm article .divMepForm .divBouttonQtePrix .mepDivQuant label {
   border: 1px solid black;
   border-right: none;
   display: flex;
@@ -256,27 +260,21 @@ h3 {
   width: 50px;
   background-color: #b892bf;
 }
-
-.mepCoul {
+.mepForm article .divMepForm .divBouttonQtePrix .mepDivQuant .mepQtt {
+  width: 40px;
+}
+.mepForm article .divMepForm .divBouttonQtePrix .divPrix {
+  margin: 20px;
+}
+.mepForm article .divMepForm .divBouttonQtePrix .divPrix p {
   font-size: 1.5em;
-  padding-right: 40px;
-  padding: 0;
+  padding-left: 50px;
   margin: 0;
-  display: flex;
-  align-items: center;
 }
 
 .bouttonSupprPanier {
   width: 10px;
   height: 10px;
-}
-
-.divPrix {
-  margin: 20px;
-}
-.divPrix p {
-  font-size: 1.5em;
-  padding-left: 50px;
 }
 
 .divCheckSupr {

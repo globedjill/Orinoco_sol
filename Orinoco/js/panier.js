@@ -48,55 +48,12 @@ ajaxGet("http://localhost:3000/api/teddies", function (reponse) {
 
         //creation des elements de reference
     const form = document.createElement('form');
-    form.className = 'row mepForm';
+    form.className = 'column mepForm';
     form.method = 'post';
     form.action = 'traitement.php';
 
-    const divMepForm = document.createElement('div');
-    divMepForm.className = 'divMepForm';
     
-    const recupLocal = JSON.parse(localStorage.getItem('ours'));
-
-    const image = recupLocal.image;
-    const img = document.createElement('img');
-    img.className = 'imagePanier';
-    img.src = image;
-
-    const divNomCouleur = document.createElement('div');
-    divNomCouleur.className = 'row mepDivPanier';
-    const nomRecup = recupLocal.nomTeddy;
-    const nom = document.createElement('h3');
-    nom.textContent = nomRecup;
-    const couleur = recupLocal.coul;
-    const coul = document.createElement('p');
-    coul.className = 'mepCoul';
-    coul.textContent = couleur;
-
-    const recupQuantite = recupLocal.quantite;
-    const divQuant = document.createElement('div');
-    divQuant.className = 'row mepDivQuant';
-    const quantiteType = document.createElement('input');
-    quantiteType.type = 'number';
-    quantiteType.className = 'mepQtt';
-    var qttVal = quantiteType.value = recupQuantite;
-    const quantiteLabel = document.createElement('label');
-    quantiteLabel.textContent = 'Qté ';
-    const divBouttonQtePrix = document.createElement('div');
-    divBouttonQtePrix.className = 'row divBouttonQtePrix';
-    const bouttonSupprimer = document.createElement('input');
-    bouttonSupprimer.type = 'checkbox';
-    bouttonSupprimer.className = 'bouttonSupprPanier';
-
-    const divPrix = document.createElement('div');
-    divPrix.className = 'row divPrix';
-    const recupPrix = recupLocal.prix;
-    const affichePrix = document.createElement('p');
-    affichePrix.textContent = recupPrix + " €";
-
-    const sousTotal = document.createElement('p');
-    sousTotal.textContent = (recupPrix * qttVal) + " €";
-
-        //Ajout des elements
+    //ajout des elements titre
     main.appendChild(titrePanier);
     main.appendChild(divLegende);
     divLegende.appendChild(divCheckSupr);
@@ -106,17 +63,71 @@ ajaxGet("http://localhost:3000/api/teddies", function (reponse) {
     divParaPrix.appendChild(pPrixTeddy);
     divParaPrix.appendChild(pSsTotalTeddy);
     main.appendChild(form);
-    form.appendChild(bouttonSupprimer);
-    form.appendChild(img);
-    form.appendChild(divMepForm);
-    divMepForm.appendChild(divNomCouleur);
-    divNomCouleur.appendChild(nom);
-    divNomCouleur.appendChild(coul);
-    divMepForm.appendChild(divBouttonQtePrix);
-    divBouttonQtePrix.appendChild(divQuant);
-    divQuant.appendChild(quantiteLabel);
-    divQuant.appendChild(quantiteType);
-    divBouttonQtePrix.appendChild(divPrix);
-    divPrix.appendChild(affichePrix);
-    divPrix.appendChild(sousTotal);
+
+    const recupLocal = JSON.parse(localStorage.getItem('ours'));
+    console.log(recupLocal);
+
+    recupLocal.forEach(function (element) {
+
+        const article = document.createElement('article');
+        article.className = ' row';
+
+        const image = element.image;
+        const img = document.createElement('img');
+        img.className = 'imagePanier';
+        img.src = image;
+
+        const divMepForm = document.createElement('div');
+        divMepForm.className = 'divMepForm';
+
+        const divNomCouleur = document.createElement('div');
+        divNomCouleur.className = 'row mepDivPanier';
+        const nomRecup = element.nomTeddy;
+        const nom = document.createElement('h3');
+        nom.textContent = nomRecup;
+        const couleur = element.coul;
+        const coul = document.createElement('p');
+        coul.className = 'mepCoul';
+        coul.textContent = couleur;
+
+        const recupQuantite = element.quantite;
+        const divQuant = document.createElement('div');
+        divQuant.className = 'row mepDivQuant';
+        const quantiteType = document.createElement('input');
+        quantiteType.type = 'number';
+        quantiteType.className = 'mepQtt';
+        var qttVal = quantiteType.value = recupQuantite;
+        const quantiteLabel = document.createElement('label');
+        quantiteLabel.textContent = 'Qté ';
+        const divBouttonQtePrix = document.createElement('div');
+        divBouttonQtePrix.className = 'row divBouttonQtePrix';
+        const bouttonSupprimer = document.createElement('input');
+        bouttonSupprimer.type = 'checkbox';
+        bouttonSupprimer.className = 'bouttonSupprPanier';
+
+        const divPrix = document.createElement('div');
+        divPrix.className = 'row divPrix';
+        const recupPrix = element.prix;
+        const affichePrix = document.createElement('p');
+        affichePrix.textContent = recupPrix + " €";
+
+        const sousTotal = document.createElement('p');
+        sousTotal.textContent = (recupPrix * qttVal) + " €";
+
+        //Ajout des elements 
+        form.appendChild(article);
+        article.appendChild(bouttonSupprimer);
+        article.appendChild(img);
+        article.appendChild(divMepForm);
+        divMepForm.appendChild(divNomCouleur);
+        divNomCouleur.appendChild(nom);
+        divNomCouleur.appendChild(coul);
+        divMepForm.appendChild(divBouttonQtePrix);
+        divBouttonQtePrix.appendChild(divQuant);
+        divQuant.appendChild(quantiteLabel);
+        divQuant.appendChild(quantiteType);
+        divBouttonQtePrix.appendChild(divPrix);
+        divPrix.appendChild(affichePrix);
+        divPrix.appendChild(sousTotal);
+    });
 });
