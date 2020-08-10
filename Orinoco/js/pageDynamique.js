@@ -107,7 +107,8 @@ ajaxGet("http://localhost:3000/api/teddies/"+recherche, function (reponse) {
 
     bouttonAjouterAuPanier.addEventListener('click', function () {  
         class oursPanier {
-            constructor(quantite, coul, image, nomTeddy) {
+            constructor(id, nomTeddy, image, quantite, prix, coul ) {
+                this.id = table._id;
                 this.nomTeddy = h2.textContent;
                 this.image = img.src;
                 this.quantite = input.value;

@@ -22,9 +22,7 @@ ajaxGet("http://localhost:3000/api/teddies", function (reponse) {
         span.className = 'prix';
         const mepBoutton = document.createElement('div');
         mepBoutton.className = 'bouton';
-        const boutton = document.createElement('a');
-        boutton.className = 'plusDinfo';
-        boutton.textContent = 'Ajouter au Panier';
+      
         const boutton2 = document.createElement('a');
         boutton2.className = "plusDinfo";
         boutton2.href = "pageProduit.html?"+ element._id;
@@ -41,7 +39,6 @@ ajaxGet("http://localhost:3000/api/teddies", function (reponse) {
         h2.appendChild(para);
         para.appendChild(span);
         mep.appendChild(mepBoutton);
-        mepBoutton.appendChild(boutton);
         mepBoutton.appendChild(boutton2);
     });
 });
