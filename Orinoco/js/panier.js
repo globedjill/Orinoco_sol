@@ -94,13 +94,12 @@ ajaxGet("http://localhost:3000/api/teddies", function (reponse) {
     main.appendChild(divVal);
     divVal.appendChild(pTotal);
     divVal.appendChild(totalNumber);
-    idTable = [];
+
+
     if (recupLocal != null) {
         recupLocal.forEach(function (element) {
             const article = document.createElement('article');
             article.className = 'row article';
-            idTable.push(element.id);
-            console.log(idTable);
 
             const image = element.image;
             const img = document.createElement('img');
@@ -161,10 +160,12 @@ ajaxGet("http://localhost:3000/api/teddies", function (reponse) {
             divPrix.appendChild(sousTotal);
         });
     }
-    //fonction supprimer des elements du panier
+
+    //supprimer des elements du panier
     const recupBouttonSupprimer = document.getElementsByClassName('bouttonSupprPanier');
     const recupArticle = document.getElementsByClassName('article');
-    //fonction selection individuelle 
+
+    //fonction selection individuelle
     for (var i = 0; i < recupBouttonSupprimer.length; i++) {
         recupBouttonSupprimer[i].addEventListener('click', function () {
             for (var i = 0; i < recupBouttonSupprimer.length; i++) {
@@ -177,7 +178,7 @@ ajaxGet("http://localhost:3000/api/teddies", function (reponse) {
         });
     }
 
-    //fonction tous selectionner du boutton principal 
+    //fonction tous selectionner a partir du boutton general  
     supprimer.addEventListener('click', function () {
         if (supprimer.checked === true) {
             labelSupr.textContent = 'Tous Déselectionner';
@@ -198,6 +199,7 @@ ajaxGet("http://localhost:3000/api/teddies", function (reponse) {
 
             if (recupChecked === true ) {
                 console.log(recupArticle[i]);
+                remove.recupArticle[i];
                 //document.location.reload(true); 
             }
         }
