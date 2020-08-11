@@ -50,20 +50,24 @@ nav ul li {
   margin: auto;
   padding: 0 20px;
 }
-nav ul li #mepUl {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  margin-top: 5px;
-  padding: 0;
+nav ul li a {
+  text-decoration: none;
 }
-nav ul li #mepUl p {
-  opacity: 0;
-  background-color: #c300e6;
-  margin-top: 3px;
-  margin: 0;
-  width: 90px;
+nav ul li div p {
+  text-align: center;
+  font-size: 1.1em;
+  opacity: 1;
+  position: relative;
+  background-color: white;
+  border-radius: 100%;
+  border: 2px solid violet;
+  width: 20px;
+  height: 20px;
+}
+nav ul li div i {
+  top: 10px;
+  position: absolute;
+  font-size: 35px;
 }
 
 i {

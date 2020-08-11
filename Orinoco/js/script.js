@@ -3,7 +3,6 @@
 //affichage de chaque teddys dynamiquement dans la page ours.html
 ajaxGet("http://localhost:3000/api/teddies", function (reponse) {
     var table = JSON.parse(reponse);
-    console.log(table);
    
     table.forEach(function (element) {
         const article = document.createElement('article');

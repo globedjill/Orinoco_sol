@@ -15,15 +15,15 @@
         </div>
         <nav>
             <ul>
-                <li id="lesProduits">
-                    <a href="../../index.html">Les produits</a>
-                    <div id="mepUl">
-                        <p><a href="ours.html">Les Ours</a></p>
-                        <p><a href="camera.html">Les cameras</a></p>
-                        <p><a href="meuble.html">Les meubles</a></p>
-                    </div>
+                <li id="lesProduits"><a href="../../index.html">Les produits</a></li>
+                <li id="panier">
+                    <a href="panier.html">
+                        <div class="ajoutPanier">
+                            <i class="fas fa-cart-plus"></i>
+                            <p id="ajoutPanier"></p>
+                        </div>
+                    </a>
                 </li>
-                <li id="panier"><a href='panier.html'>Mon panier</a></li>
             </ul>
         </nav>
     </header>
@@ -35,8 +35,9 @@
         <h3>Nous suivre</h3>
     </footer>
 
-    <script src="../js/pageDynamique.js"></script>
+    <script src="../js/ajaxGet.js"></script>
     <script src="../js/menuDeroulant.js"></script>
+    <script src="../js/pageDynamique.js"></script>
 </body>
 </html>
 

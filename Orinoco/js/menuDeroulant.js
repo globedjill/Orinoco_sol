@@ -1,21 +1,17 @@
-﻿var mepUl = document.getElementById('mepUl');
-var pdt = document.getElementById('lesProduits');
-var p = mepUl.querySelectorAll('p');
+﻿// creation du widget panier
+ajaxGet("http://localhost:3000/api/teddies/", function (reponse) {
+    var table = JSON.parse(reponse);
+    const recupLocal = JSON.parse(localStorage.getItem('ours'));
 
-pdt.addEventListener('mouseenter', function (e) {
-    e.preventDefault();
-    for (var i = 0; i < p.length; i++) {
-        var result = p[i];
-        result.style.opacity = "1";
-        result.style.animation = "nav 1s";
+    function ajoutPanier() {
+        //console.log(recupLocal.length);
+        var ajoutPanier = document.getElementById('ajoutPanier');
+        if (recupLocal.length < 1) {
+            var recupAjoutPanier = document.getElementById('ajoutPanier');
+            recupAjoutPanier.style.opacity = '0';
+        } else {
+            ajoutPanier.textContent = recupLocal.length;
+        }
     }
-    pdt.addEventListener('mouseout', function (e) {
-        e.preventDefault();
-        for (var i = 0; i < p.length; i++) {
-            var result = p[i];
-            result.style.opacity = "0";
-            result.style.animation = "nav 1s";
-            }
-        });
+    ajoutPanier();
 });
-

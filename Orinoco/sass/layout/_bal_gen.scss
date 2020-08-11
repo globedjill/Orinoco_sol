@@ -38,21 +38,26 @@ nav {
             position: relative;
             margin: auto;
             padding: 0 20px;
-
-            & #mepUl {
-                position: absolute;
-                display: flex;
-                flex-direction: column;
-                margin: 0;
-                margin-top: 5px;
-                padding: 0;
-
-                & p {
-                    opacity:0;
-                    background-color: $backGroundColor;
-                    margin-top: 3px;
-                    margin: 0;
-                    width: 90px;
+            & a{
+                text-decoration:none;
+            }
+            
+            & div {
+                & p{
+                    text-align:center;
+                    font-size:1.1em;
+                    opacity:1;
+                    position:relative;
+                    background-color:white;
+                    border-radius:100%;
+                    border:2px solid violet;
+                    width:20px;
+                    height:20px;
+                }
+                & i {
+                    top:10px;
+                    position:absolute;
+                    font-size:35px;
                 }
             }
         }

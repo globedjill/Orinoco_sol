@@ -1,19 +1,4 @@
-﻿function ajaxGet(url, callback) {
-    var req = new XMLHttpRequest();
-    req.open("GET", url);
-    req.addEventListener('load', function () {
-        if (req.status >= 200 && req.status < 400) {
-            callback(req.responseText);
-        } else {
-            console.error(req.status + '' + req.statusText + '' + url);
-        }
-    });
-    req.addEventListener('error', function () {
-        console.error("Erreur reseaux avec l'URL" + url);
-    });
-    req.send(null);
-}
-//recuperation et affichage des ours
+﻿//recuperation et affichage des ours 
 const regex = /\?/;
 var recherche = window.location.search.replace(regex, "");
 
@@ -97,7 +82,7 @@ ajaxGet("http://localhost:3000/api/teddies/"+recherche, function (reponse) {
         var creer = document.createElement('option');
         creer.textContent = table.colors[i];
         select.appendChild(creer);
-    }
+        }
 
     var locGet = [];
 
@@ -115,21 +100,70 @@ ajaxGet("http://localhost:3000/api/teddies/"+recherche, function (reponse) {
                 this.prix = table.price;
                 this.coul = select.value;
             }
-        }
-
+        }   
         var nouveauPanier = new oursPanier();
 
-        var loc = localStorage.setItem('ours', JSON.stringify(nouveauPanier));
-        //creer une boucle sur locGET 
-        //...
+        if (nouveauPanier.coul === '--Choisir la couleur--') {
+            alert('Veiller choisir une couleur');
+            return;
+        }
+        // je parcour mon tableau 
+        locGet.forEach(function (e) {
+        //si id et la couleur sont identique alors j'ajoute la quantite a l'element trouvé 
+        if (e.id === nouveauPanier.id && e.coul === nouveauPanier.coul) {            
+             if (confirm("Vous aver déja " + e.quantite + " produits du même type dans votre panier. Voulez vous que nous ajoutions cette quantite aux produits ?")) {
+                 e.quantite = parseInt(e.quantite) + parseInt(nouveauPanier.quantite);
+                 nouveauPanier = e;
+                 locGet.splice(locGet.indexOf(e), 1);
+                 }
+             }
+        
+        });
+        
+        const recupLocal = JSON.parse(localStorage.getItem('ours'));
 
-        locGet.push(nouveauPanier);
-        localStorage.setItem('ours', JSON.stringify(locGet));
-        if (confirm('Aler vers le panier')) {
-            bouttonAjouterAuPanier.onclick = window.location.href = 'panier.html';
-        };
-        console.log(locGet);
+        function ajoutPanier() {
+            var recupAjoutPanier = document.getElementById('ajoutPanier');
+            var ajoutPanier = document.getElementById('ajoutPanier');
+            if (recupLocal.length === 0) {
+                recupAjoutPanier.style.opacity = '0';
+            } else {
+                recupAjoutPanier.style.opacity = '1';
+                ajoutPanier.textContent = recupLocal.length;
+            }
+        }
+        ajoutPanier();
     });
 });
 
 
+function popUp() {
+    //creer element popUp
+    const creerDivPopUP = document.createElement('div');
+    creerDivPopUP.id = 'popUp';
+    creerDivPopUP.style.position = 'absolute';
+    creerDivPopUP.style.top = "30%";
+    creerDivPopUP.style.left = "20%";
+    creerDivPopUP.style.width = "300px";
+    creerDivPopUP.style.backgroundColor = "white";
+    creerDivPopUP.style.border = "2px solid black";
+
+    const pPopUp = document.createElement('p');
+    pPopUp.textContent = "Vous aver déja " + e.quantite + " produits du meme type dans votre panier. Voulez vous que nous ajoutions cette quantite aux produits ?";
+
+    const divRep = document.createElement('div');
+    divRep.id = "row divRep";
+    const buttonOk = document.createElement('button');
+    buttonOk.id = 'buttonOk';
+    buttonOk.textContent = 'OK'
+    const buttonAnnuler = document.createElement('button');
+    buttonAnnuler.id = 'buttonAnnuler';
+    buttonAnnuler.textContent = 'Annuler';
+
+    //insertion popUP windows
+    main.appendChild(creerDivPopUP);
+    creerDivPopUP.appendChild(pPopUp);
+    creerDivPopUP.appendChild(divRep);
+    divRep.appendChild(buttonOk);
+    divRep.appendChild(buttonAnnuler);
+}
