@@ -1,4 +1,4 @@
-﻿//recuperation et affichage des ours 
+﻿//recuperation et affichage des ours  
 const regex = /\?/;
 var recherche = window.location.search.replace(regex, "");
 
@@ -84,7 +84,7 @@ ajaxGet("http://localhost:3000/api/teddies/"+recherche, function (reponse) {
         select.appendChild(creer);
         }
 
-    var locGet = [];
+    var locGet =[];
 
     if (localStorage.getItem('ours')) {
         locGet = JSON.parse(localStorage.getItem('ours'));
@@ -107,19 +107,26 @@ ajaxGet("http://localhost:3000/api/teddies/"+recherche, function (reponse) {
             alert('Veiller choisir une couleur');
             return;
         }
-        // je parcour mon tableau 
+        // je parcour mon tableau
+        let ajout = true;
         locGet.forEach(function (e) {
-        //si id et la couleur sont identique alors j'ajoute la quantite a l'element trouvé 
-        if (e.id === nouveauPanier.id && e.coul === nouveauPanier.coul) {            
-             if (confirm("Vous aver déja " + e.quantite + " produits du même type dans votre panier. Voulez vous que nous ajoutions cette quantite aux produits ?")) {
-                 e.quantite = parseInt(e.quantite) + parseInt(nouveauPanier.quantite);
-                 nouveauPanier = e;
-                 locGet.splice(locGet.indexOf(e), 1);
-                 }
-             }
-        
+            if (e.id === nouveauPanier.id && e.coul === nouveauPanier.coul) {
+                if (confirm("Vous aver déja " + e.quantite + " produits du même type dans votre panier. Voulez vous que nous ajoutions cette quantite aux produits ?")) {
+                    e.quantite = parseInt(e.quantite) + parseInt(nouveauPanier.quantite);
+                    nouveauPanier = e;
+                    locGet.splice(locGet.indexOf(e), 1);
+                } else {
+                    ajout = false;
+                }
+            } 
         });
-        
+        if (ajout) {
+            locGet.push(nouveauPanier);
+            localStorage.setItem('ours', JSON.stringify(locGet));
+        }
+       
+        console.log(locGet);
+
         const recupLocal = JSON.parse(localStorage.getItem('ours'));
 
         function ajoutPanier() {
@@ -136,9 +143,8 @@ ajaxGet("http://localhost:3000/api/teddies/"+recherche, function (reponse) {
     });
 });
 
-
 function popUp() {
-    //creer element popUp
+    //creer element popUp  
     const creerDivPopUP = document.createElement('div');
     creerDivPopUP.id = 'popUp';
     creerDivPopUP.style.position = 'absolute';

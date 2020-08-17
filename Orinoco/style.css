@@ -325,4 +325,48 @@ fieldset {
   padding: 10px;
 }
 
+#divPopUp {
+  margin: 0;
+  position: fixed;
+  width: 80%;
+  height: 90%;
+  top: 5%;
+  left: 10%;
+  background-color: white;
+  border: 2px solid black;
+}
+#divPopUp #h4 {
+  font-size: 1.3em;
+  text-align: center;
+  padding: 30px 0;
+  border-bottom: 1px solid black;
+}
+#divPopUp #divForm {
+  overflow: scroll;
+}
+#divPopUp #divForm #form #fieldset .divForm {
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px 0;
+}
+#divPopUp #divForm #form #fieldset .divForm label {
+  background-color: #b892bf;
+  text-align: center;
+  flex-grow: 1;
+  border-radius: 10px 0 0 10px;
+  padding-left: 10px;
+}
+#divPopUp #divForm #form #divRecap {
+  border: 1px solid black;
+  flex-grow: 1;
+}
+#divPopUp #divForm #form #divRecap h5 {
+  margin: 0 20px;
+  border-right: 2px solid black;
+  padding: 20px;
+}
+#divPopUp #divForm #form #divRecap #divRecapElm {
+  flex-grow: 1;
+}
+
 /*# sourceMappingURL=style.css.map */

@@ -1,17 +1,13 @@
 ﻿// creation du widget panier
-ajaxGet("http://localhost:3000/api/teddies/", function (reponse) {
-    var table = JSON.parse(reponse);
-    const recupLocal = JSON.parse(localStorage.getItem('ours'));
+    let recupLocal = [];
 
-    function ajoutPanier() {
-        //console.log(recupLocal.length);
+    if (localStorage.getItem('ours')) {
+        recupLocal = JSON.parse(localStorage.getItem('ours'));
+}
+
         var ajoutPanier = document.getElementById('ajoutPanier');
-        if (recupLocal.length < 1) {
-            var recupAjoutPanier = document.getElementById('ajoutPanier');
-            recupAjoutPanier.style.opacity = '0';
+        if (recupLocal.length === 0) {
+            ajoutPanier.style.opacity = '0';
         } else {
             ajoutPanier.textContent = recupLocal.length;
         }
-    }
-    ajoutPanier();
-});
