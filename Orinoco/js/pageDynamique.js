@@ -12,7 +12,7 @@ ajaxGet("http://localhost:3000/api/teddies/"+recherche, function (reponse) {
     var h2 = document.createElement('h2');
     var img = document.createElement('img');
     var div = document.createElement('div');
-    div.className = 'column';
+    div.className = 'column divDescription';
     var div2 = document.createElement('div');
     div2.className = 'description';
     var description = document.createElement('p');
@@ -42,10 +42,12 @@ ajaxGet("http://localhost:3000/api/teddies/"+recherche, function (reponse) {
     var div6 = document.createElement('div');
     div6.className = 'row';
     var bouttonAjouterAuPanier = document.createElement('button');
+    bouttonAjouterAuPanier.className = "plusDinfo";
     bouttonAjouterAuPanier.textContent = "Ajouter au panier";
     var bouttonContinuerMesAchats = document.createElement('a');
-    bouttonContinuerMesAchats.href = "ours.html";
-    bouttonContinuerMesAchats.title = 'retour';
+    bouttonContinuerMesAchats.href = "../../index.html";
+    bouttonContinuerMesAchats.title = 'Retour aux articles';
+    bouttonContinuerMesAchats.id = 'bouttonContinuerMesAchats';
     var bouttonReturn = document.createElement('i');
     bouttonReturn.className = 'fas fa-undo-alt';
 
@@ -75,7 +77,7 @@ ajaxGet("http://localhost:3000/api/teddies/"+recherche, function (reponse) {
 
     img.src = table.imageUrl;
     h2.textContent = table.name;
-    span.textContent = table.price + " €";
+    span.textContent = table.price/100 + " €";
     description.textContent = table.description;
 
     for (var i = 0; i < table.colors.length; i++) {
@@ -104,14 +106,19 @@ ajaxGet("http://localhost:3000/api/teddies/"+recherche, function (reponse) {
         var nouveauPanier = new oursPanier();
 
         if (nouveauPanier.coul === '--Choisir la couleur--') {
-            alert('Veiller choisir une couleur');
+            popUp(); 
+            buttonOk.addEventListener('click', function () {
+                divPopUpAlert.remove(divPopUpAlert);
+
+            });
             return;
         }
-        // je parcour mon tableau
+        // je parcour mon tableau  
         let ajout = true;
         locGet.forEach(function (e) {
             if (e.id === nouveauPanier.id && e.coul === nouveauPanier.coul) {
-                if (confirm("Vous aver déja " + e.quantite + " produits du même type dans votre panier. Voulez vous que nous ajoutions cette quantite aux produits ?")) {
+
+                if (confirm()) {
                     e.quantite = parseInt(e.quantite) + parseInt(nouveauPanier.quantite);
                     nouveauPanier = e;
                     locGet.splice(locGet.indexOf(e), 1);
@@ -124,9 +131,6 @@ ajaxGet("http://localhost:3000/api/teddies/"+recherche, function (reponse) {
             locGet.push(nouveauPanier);
             localStorage.setItem('ours', JSON.stringify(locGet));
         }
-       
-        console.log(locGet);
-
         const recupLocal = JSON.parse(localStorage.getItem('ours'));
 
         function ajoutPanier() {
@@ -143,33 +147,65 @@ ajaxGet("http://localhost:3000/api/teddies/"+recherche, function (reponse) {
     });
 });
 
+/*class addPopUp {
+    constructor(main, divContainer, para, buttonOk,buttonAnnuler) {
+        this.main = document.querySelector('main');
+        this.divPopUp = document.createElement('div');
+        this.para = document.createElement('p');
+        this.buttonOk = document.createElement('button');
+        this.buttonAnnuler = document.createElement('button');
+    }
+    popUpAlert() {
+        divPopUp.id = "divPopUpAlert";
+        para.id = "paraAlert";
+        para.textContent = 'Oups !!! vous devez choisir une couleur';
+        buttonOk.id = 'buttonOk';
+        buttonOk.className = 'plusDinfo';
+        buttonOk.textContent = 'Ok j\'y remidie';
+
+        main.appendChild(divPopUp);
+        divPopUp.appendChild(paraAlert);
+        divPopUp.appendChild(buttonOk);
+    }
+}*/
+
 function popUp() {
-    //creer element popUp  
-    const creerDivPopUP = document.createElement('div');
-    creerDivPopUP.id = 'popUp';
-    creerDivPopUP.style.position = 'absolute';
-    creerDivPopUP.style.top = "30%";
-    creerDivPopUP.style.left = "20%";
-    creerDivPopUP.style.width = "300px";
-    creerDivPopUP.style.backgroundColor = "white";
-    creerDivPopUP.style.border = "2px solid black";
-
-    const pPopUp = document.createElement('p');
-    pPopUp.textContent = "Vous aver déja " + e.quantite + " produits du meme type dans votre panier. Voulez vous que nous ajoutions cette quantite aux produits ?";
-
-    const divRep = document.createElement('div');
-    divRep.id = "row divRep";
+    const main = document.querySelector('main');
+    const divPopUp = document.createElement('div');
+    divPopUp.id = "divPopUpAlert";
+    const paraAlert = document.createElement('p');
+    paraAlert.id = "paraAlert";
+    paraAlert.textContent = 'Oups !!! vous devez choisir une couleur';
     const buttonOk = document.createElement('button');
     buttonOk.id = 'buttonOk';
-    buttonOk.textContent = 'OK'
-    const buttonAnnuler = document.createElement('button');
-    buttonAnnuler.id = 'buttonAnnuler';
-    buttonAnnuler.textContent = 'Annuler';
+    buttonOk.className = 'plusDinfo';
+    buttonOk.textContent = 'Ok j\'y remidie';
 
-    //insertion popUP windows
-    main.appendChild(creerDivPopUP);
-    creerDivPopUP.appendChild(pPopUp);
-    creerDivPopUP.appendChild(divRep);
-    divRep.appendChild(buttonOk);
-    divRep.appendChild(buttonAnnuler);
+    main.appendChild(divPopUp);
+    divPopUp.appendChild(paraAlert);
+    divPopUp.appendChild(buttonOk);
+}
+function popUpConfirm() {
+    const main = document.querySelector('main');
+    const divPopUp = document.createElement('div');
+    divPopUp.id = "divPopUpConfirm";
+    const paraAlert = document.createElement('p');
+    paraConfirm.id = "paraConfirm";
+    paraConform.textContent = "Vous aver déja " + e.quantite + " produits du même type dans votre panier. Voulez vous que nous ajoutions cette quantite aux produits ?";
+    const divBoutton = document.createElement('div');
+    divBoutton.id = "divBoutton";
+    const buttonOkConfirrm = document.createElement('button');
+    buttonOkConfirm.id = 'buttonOk';
+    buttonOkConfirm.className = 'plusDinfo';
+    buttonOkConfirm.textContent = 'Ok j\'y remidie';
+    const buttonAnnulerConfirm = document.createElement('button');
+    buttonAnnulerConfirm.id = 'buttonAnnuler';
+    buttonAnnulerConfirm.className = 'plusDinfo';
+    buttonAnnulerConfirm.textContent = 'Annuler';
+
+    main.appendChild(divPopUp);
+    divPopUp.appendChild(paraAlert);
+    divPopUp.appendChild(divBoutton);
+    divBoutton.appendChild(buttonOk);
+    divBoutton.appendChild(buttonAnnuler);
 }

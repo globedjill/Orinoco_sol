@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="Orinoco/style.css" />
+    <link rel="stylesheet" href="orinoco/style.css" />
     <meta charset="utf-8" />
     <script src="https://kit.fontawesome.com/8ee02d9cbc.js" crossorigin="anonymous"></script>
     <title>Orinoco</title>
@@ -16,26 +16,29 @@
         <nav>
             <ul>
                 <li id="lesProduits"><a href="index.html">Les produits</a></li>
-                <li id="panier"><a href="Orinoco/html/panier.html"><i class="fas fa-cart-plus"></i></a></li>
+                <li id="panier">
+                    <a href="orinoco/html/panier.html">
+                        <div class="ajoutPanier">
+                            <i class="fas fa-cart-plus"></i>
+                            <p id="ajoutPanier"></p>
+                        </div>
+                    </a>
+                </li>
             </ul>
         </nav>
     </header>
     <main>
-        <article>
-            <a href="Orinoco/html/ours.html">
-                <picture>
-                    <img src="Orinoco/img/ours/teddy_1.jpg" />
-                </picture>
-                <div class="mep">
-                    <h2 id="peluche">Les Peluches </h2>
-                </div>
-            </a>
-        </article>
+        <!--Afficher dynamique des éléments via script-->
     </main>
     <footer>
-        <h3><a href="Orinoco/html/contact.html">Nous Contacter</a></h3>
+        <h3><a href="../../contact.html">Nous Contacter</a></h3>
         <h3>Nous suivre</h3>
     </footer>
+
+    
+    <script src="orinoco/js/ajaxGet.js"></script>
+    <script src="orinoco/js/script.js"></script>
+    <script src="orinoco/js/menuDeroulant.js"></script>
 
 </body>
 </html>

@@ -13,7 +13,6 @@
     }
 
     const main = document.querySelector('main');
-    main.className = 'column';
         //titre page  
     const titrePanier = document.createElement('h2');
     titrePanier.textContent = 'Votre panier';
@@ -198,18 +197,23 @@ bouttonSuppression.addEventListener('click', function () {
     //fonction suppression article
     recupArticle.forEach(function (e) {
         let recupChecked = e.childNodes[0].checked;
-
         if (recupChecked === true) {
             e.remove(e);
+
             for (var i = 0; i < recupLocal.length; i++) {
-            let recupIdArticleLocal = recupLocal[i];
-            if (recupArticle.value === recupIdArticleLocal.id) {
-                   totalNumber.textContent = prixTotal();
+
+                let recupIdArticleLocal = recupLocal[i];
+                console.log(recupArticle);
+                console.log(recupIdArticleLocal);
+                if (e.id === recupIdArticleLocal.id) {
+                    console.log('test');
+
                    recupLocal.splice(recupIdArticleLocal, 1);
 
-                    var ajoutPanier = document.getElementById('ajoutPanier');
-
-                   ajoutPanier.textContent = recupLocal.length;
+                    var ajoutPanier = document.getElementById('ajoutPanier');                    
+                ajoutPanier.textContent = recupLocal.length;
+                console.log(prixTotal());
+                totalNumber.textContent = prixTotal();
                 }
             };
         }
@@ -221,9 +225,8 @@ bouttonSuppression.addEventListener('click', function () {
     //passer la commande formulaire d'enregistrement 
     buttonValiderPanier.addEventListener('click', function (e) {
         e.preventDefault();
-        console.log(recupLocal);
 
-        //creation des elements 
+        //creation des elements  
         const divPopUp = document.createElement('div');
         divPopUp.className = 'column';
         divPopUp.id = 'divPopUp';
@@ -250,11 +253,11 @@ bouttonSuppression.addEventListener('click', function () {
         divNom.className = 'row divForm';
         const labelNom = document.createElement('label');
         labelNom.textContent = 'Nom ';
-        labelNom.name = 'nom'
+        labelNom.name = 'nom';
         const inputNom = document.createElement('input');
         inputNom.type = 'text';
         inputNom.name = 'nom';
-        //inputNom.value = 'Ajouter un nom'; 
+        inputNom.value = 'mingot'; 
         inputNom.maxLength = '20';
         inputNom.required = 'true';
 
@@ -267,7 +270,7 @@ bouttonSuppression.addEventListener('click', function () {
         const inputPrenom = document.createElement('input');
         inputPrenom.type = 'text';
         inputPrenom.name = 'prenom';
-        //inputNom.value = 'Ajouter un nom'; 
+        inputPrenom.value = 'virgil'; 
         inputPrenom.maxLength = '20';
         inputPrenom.required = 'true';
 
@@ -282,6 +285,7 @@ bouttonSuppression.addEventListener('click', function () {
         const numInputAdresse = document.createElement('input');
         numInputAdresse.type = 'number';
         numInputAdresse.name = 'num';
+        numInputAdresse.value = "2";
         const divAdresse = document.createElement('div');
         divAdresse.className = 'row divForm';
         const labelAdresse = document.createElement('label');
@@ -291,6 +295,7 @@ bouttonSuppression.addEventListener('click', function () {
         inputAdresse.type = 'text';
         inputAdresse.name = 'adresse';
         inputAdresse.required = 'true';
+        inputAdresse.value = 'route des brandes';
         const divCpAdresse = document.createElement('div');
         divCpAdresse.className = 'row divForm';
         const cpLabelAdresse = document.createElement('label');
@@ -300,6 +305,7 @@ bouttonSuppression.addEventListener('click', function () {
         cpInputAdresse.type = 'number';
         cpInputAdresse.name = 'cp';
         cpInputAdresse.required = 'true';
+        cpInputAdresse.value = '24430';
         const divVille = document.createElement('div');
         divVille.className = 'row divForm';
         const labelVille = document.createElement('label');
@@ -309,6 +315,7 @@ bouttonSuppression.addEventListener('click', function () {
         inputVille.type = 'text';
         inputVille.name = 'ville';
         inputVille.required = 'true';
+        inputVille.value = "marsac sur l'isle"
 
         //tel et mail
         const legendeMail = document.createElement('legende');
@@ -322,6 +329,7 @@ bouttonSuppression.addEventListener('click', function () {
         inputMail.name = 'mail';
         inputMail.type = 'mail';
         inputMail.required = 'true';
+        inputMail.value = 'virgil.mingot@free.fr';
         const divConfirmMail = document.createElement('div');
         divConfirmMail.className = 'raw divForm';
         const labelConfirmMail = document.createElement('label');
@@ -357,50 +365,45 @@ bouttonSuppression.addEventListener('click', function () {
         const divButton = document.createElement('div');
         divButton.id = 'row divButton';
         const bouttonEnvoyerCommande = document.createElement('button');
-        bouttonEnvoyerCommande.textContent = 'Confirmer la commande';
         bouttonEnvoyerCommande.id = 'buttonEnvoyerCommande';
+        const lienConfirmation = document.createElement('a');
+        lienConfirmation.href = 'retourConfirmation.html';
+        lienConfirmation.textContent = 'Confirmer la commande';
 
         bouttonEnvoyerCommande.addEventListener('click', function (e) {
-            e.preventDefault();
-
+            /*creation de l'objet contact */
             class nouveauContact {
-                constructor(prenom, nom, adresse, ville, mail) {
-                    this.prenom = inputPrenom.value;
-                    this.nom = inputNom.value;
-                    this.adresse = inputAdresse.value;
-                    this.ville = inputVille.value;
-                    this.mail = inputMail.value;
+                constructor(firstName, lastName, address, city, email) {
+                    this.firstName = inputPrenom.value;
+                    this.lastName = inputNom.value;
+                    this.address = inputAdresse.value;
+                    this.city = inputVille.value;
+                    this.email = inputMail.value;
                 }
             }
-            var contact = new nouveauContact;
-            var products = [];
+            var contactTest = new nouveauContact;
+            /*creation du tableau d'id de produit dans le panier */
+            var productsTest = [];
             recupLocal.forEach(function (e) {
-                products.push (e.id);
+                productsTest.push(e.id);
             });
-            console.log(products);
-            console.log(contact);
-
-            function ajaxPost(url, callback) {
-                var request = new XMLHttpRequest();
-                request.addEventListener('readystatechange', function () {
-                    console.log('essai');
-
-                    if (request.readyState === XMLHttpRequest.DONE && request.status === 200) {
-                        callback(request.responseText);
-                    }
-                });
-
-                request.open("POST", url);
-                request.setRequestHeader("Content-Type", "application/json");
-                request.send(products, contact);
+            class tableRecap {
+                constructor(contact, products , total) {
+                    this.contact = contactTest;
+                    this.products = productsTest;
+                }
             }
+            var envoi = JSON.stringify(new tableRecap);
+            
 
-            ajaxPost("http://localhost:3000/api/teddies/order", function (rep) {
-                var ajaxPostEssai = JSON.parse(rep);
-            });
+            ajaxPost("http://localhost:3000/api/teddies/order", function (res) {
+                let retour = localStorage.setItem('retour', res);
+            }, envoi);
+            let totalCommande = localStorage.setItem('total', prixTotal());
+
         });
-       
-        //boutton annuler  
+    
+        /*boutton annuler*/
         const bouttonAnnulerFormulaire = document.createElement('button');
         bouttonAnnulerFormulaire.textContent = 'Annuler';
         bouttonAnnulerFormulaire.id = 'annulerFormulaire';
@@ -421,6 +424,7 @@ bouttonSuppression.addEventListener('click', function () {
         divRecapElm.appendChild(paraRecupTotal);
         form.appendChild(divButton);
         divButton.appendChild(bouttonEnvoyerCommande);
+        bouttonEnvoyerCommande.appendChild(lienConfirmation);
         divButton .appendChild(bouttonAnnulerFormulaire);
         fieldset.appendChild(legende);
         fieldset.appendChild(divNom);
@@ -454,5 +458,3 @@ bouttonSuppression.addEventListener('click', function () {
         divTel.appendChild(labelTel);
         divTel.appendChild(inputTel);
     });
-
-

@@ -24,5 +24,8 @@
     <None Include="sass\utils\_keyframes.scss" />
     <None Include="js\panier.js" />
     <None Include="js\ajaxGet.js" />
+    <None Include="html\retourConfirmation.html" />
+    <None Include="js\ajaxPost.js" />
+    <None Include="js\pageConfirm.js" />
   </ItemGroup>
 </Project>
