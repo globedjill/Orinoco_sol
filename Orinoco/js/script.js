@@ -1,9 +1,6 @@
-﻿
-
-//affichage de chaque teddys dynamiquement dans la page ours.html  
+﻿//affichage de chaque teddys dynamiquement dans la page ours.html  
 ajaxGet("http://localhost:3000/api/teddies", function (reponse) {
     var table = JSON.parse(reponse);
-    console.log(table);
    
     table.forEach(function (element) {
         const article = document.createElement('article');
@@ -32,7 +29,7 @@ ajaxGet("http://localhost:3000/api/teddies", function (reponse) {
         boutton2.href = "orinoco/html/pageProduit.html?"+ element._id;
         boutton2.textContent = "Voir l'article";
 
-        //Insertion dans la page 
+        //Insertion dans la page
         const main = document.querySelector('main');
         main.appendChild(article);
         article.appendChild(picture);

@@ -8,6 +8,18 @@
     transform: scaleY(1);
   }
 }
+@keyframes panier {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0.2;
+  }
+}
 body {
   background: #faf3f7;
   margin: 0;
@@ -237,88 +249,6 @@ h3 {
   font-weight: bold;
 }
 
-.imagePanier {
-  display: flex;
-  height: 150px;
-}
-
-.mepForm {
-  margin: 0;
-  padding: 0;
-  align-items: center;
-  justify-content: stretch;
-}
-.mepForm article {
-  margin: 10px 0 10px 0;
-  padding: 10px;
-  width: 100%;
-}
-.mepForm article .divMepForm {
-  flex-grow: 1;
-  margin: 20px;
-}
-.mepForm article .divMepForm .mepDivPanier {
-  margin: 0;
-  padding: 0;
-}
-.mepForm article .divMepForm .mepDivPanier .mepCoul {
-  font-size: 1.5em;
-  padding-right: 40px;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  align-items: center;
-}
-.mepForm article .divMepForm .divBouttonQtePrix {
-  margin: 20px;
-}
-.mepForm article .divMepForm .divBouttonQtePrix .mepDivQuant {
-  padding-right: 50px;
-  flex-grow: 1;
-}
-.mepForm article .divMepForm .divBouttonQtePrix .mepDivQuant label {
-  border: 1px solid black;
-  border-right: none;
-  display: flex;
-  padding: 5px 0px 5px 15px;
-  border-radius: 10px 0 0 10px;
-  width: 50px;
-  background-color: #b892bf;
-}
-.mepForm article .divMepForm .divBouttonQtePrix .mepDivQuant .mepQtt {
-  width: 40px;
-}
-.mepForm article .divMepForm .divBouttonQtePrix .divPrix {
-  margin: 20px;
-}
-.mepForm article .divMepForm .divBouttonQtePrix .divPrix p {
-  font-size: 1.5em;
-  padding-left: 50px;
-  margin: 0;
-}
-
-.bouttonSupprPanier {
-  width: 10px;
-  height: 10px;
-}
-
-.divCheckSupr {
-  display: flex;
-  flex-grow: 1;
-}
-
-.divLegende {
-  margin: 0;
-  padding: 0;
-}
-.divLegende divCheckSupr {
-  margin: 0;
-  padding: 0;
-}
-.divLegende divParaPrix {
-  align-content: center;
-}
-
 /*Page confirmation de commande*/
 #mainPageConfirm {
   margin-left: 0;
@@ -370,21 +300,28 @@ h3 {
 #mainPageConfirm #divPageDefil {
   margin: auto;
   padding: 15px;
-  width: 500px;
+  width: 700px;
   height: 100px;
-  border: 2px solid black;
+  position: relative;
+  box-shadow: 2px 2px 12px grey;
+  border-radius: 30px;
+  font-size: 1.3em;
 }
-#mainPageConfirm #divPageDefil .carousel {
-  width: 500px;
-  position: absolute;
+#mainPageConfirm #divPageDefil #divParaOrderSend {
+  display: inline;
+  padding: 10px;
+}
+#mainPageConfirm #divPageDefil #divParaQuestion {
+  display: inline-block;
 }
 
-#divPopUpAlert {
+/*Mise en page des pop-up*/
+#divPopUpAlert, #divPopUpConfirm {
   position: absolute;
   width: 400px;
   height: 135px;
   top: 55%;
-  left: 43%;
+  left: 33%;
   text-align: center;
   font-size: 1.5em;
   color: ivory;
@@ -394,10 +331,158 @@ h3 {
   background-color: darkviolet;
   padding: 0px 30px;
 }
-#divPopUpAlert button {
+#divPopUpAlert button, #divPopUpConfirm button {
   font-size: 0.7em;
   border-radius: 30px;
   padding: 5px;
+}
+
+#divPopUpConfirm {
+  height: 192px;
+}
+#divPopUpConfirm #divBoutton {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+/* Mise en page panier */
+#mainPanier h2 {
+  text-align: center;
+}
+#mainPanier .divLegende {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+  width: 80%;
+}
+#mainPanier .divLegende .divCheckSupr {
+  flex-grow: 1;
+  margin: 0;
+  padding: 0;
+}
+#mainPanier .divLegende .divCheckSupr .buttonSuppr {
+  width: 25px;
+  height: 25px;
+  margin-top: 17px;
+  margin-right: 20px;
+}
+#mainPanier .divLegende .divCheckSupr .bouttonSupression {
+  border-radius: 30px;
+  font-size: 1em;
+}
+#mainPanier .divLegende .divCheckSupr .labelSupr {
+  margin-right: 30px;
+  align-items: center;
+  display: flex;
+  padding-bottom: 10px;
+}
+#mainPanier .divLegende .divParaPrix {
+  width: 214px;
+  justify-content: space-around;
+  align-content: center;
+}
+#mainPanier .mepForm {
+  margin: 0;
+  padding: 0;
+  align-items: flex-start;
+  justify-content: stretch;
+}
+#mainPanier .mepForm #divFormu {
+  width: 90%;
+}
+#mainPanier .mepForm #divFormu article {
+  margin: 10px 0;
+  padding: 0;
+}
+#mainPanier .mepForm #divFormu article .imagePanier {
+  height: 180px;
+  border-radius: 20% 12px;
+  margin: 10px 40px 10px 30px;
+}
+#mainPanier .mepForm #divFormu article .bouttonSupprPanier {
+  width: 25px;
+  height: 25px;
+  margin-top: 87px;
+  margin-left: 20px;
+}
+#mainPanier .mepForm #divFormu article .divMepForm {
+  flex-grow: 1;
+  margin: 0px;
+  width: 80%;
+}
+#mainPanier .mepForm #divFormu article .divMepForm .mepDivPanier {
+  margin: 0;
+  padding: 0;
+  justify-content: space-between;
+}
+#mainPanier .mepForm #divFormu article .divMepForm .mepDivPanier .mepCoul {
+  font-size: 1.3em;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  margin-right: 100px;
+}
+#mainPanier .mepForm #divFormu article .divMepForm .divBouttonQtePrix {
+  margin: 0px;
+  padding: 5px 30px 5px 0;
+}
+#mainPanier .mepForm #divFormu article .divMepForm .divBouttonQtePrix .mepDivQuant {
+  flex-grow: 1;
+  margin: 0;
+}
+#mainPanier .mepForm #divFormu article .divMepForm .divBouttonQtePrix .mepDivQuant label {
+  border: 1px solid black;
+  border-right: none;
+  display: flex;
+  padding: 5px 0px 5px 15px;
+  border-radius: 10px 0 0 10px;
+  width: 50px;
+  background-color: #b892bf;
+}
+#mainPanier .mepForm #divFormu article .divMepForm .divBouttonQtePrix .mepDivQuant .mepQtt {
+  width: 40px;
+}
+#mainPanier .mepForm #divFormu article .divMepForm .divBouttonQtePrix .divPrix {
+  margin: 0;
+}
+#mainPanier .mepForm #divFormu article .divMepForm .divBouttonQtePrix .divPrix p {
+  font-size: 1.5em;
+  padding-left: 50px;
+  margin: 0;
+}
+#mainPanier .mepForm .divFormu {
+  margin-right: 17%;
+}
+#mainPanier .mepForm .divVal {
+  padding: 10px;
+  font-size: 1.2em;
+  margin-top: 10px;
+  margin-left: 40px;
+  box-shadow: 2px 2px 12px grey;
+  width: 140px;
+}
+#mainPanier .mepForm .divVal #buttonValiderPanier {
+  border-radius: 30px;
+  font-size: 1em;
+}
+#mainPanier .mepForm .scroll {
+  top: 15%;
+  left: 79%;
+  padding: 10px;
+  font-size: 1.2em;
+  margin-top: 10px;
+  box-shadow: 2px 2px 12px grey;
+  position: fixed;
+  background-color: rgba(195, 0, 230, 0.002);
+  width: 130px;
+}
+
+.carousel {
+  position: absolute;
+  display: none;
 }
 
 form {
@@ -419,7 +504,6 @@ form #mepForm {
 
 fieldset {
   padding: 30px;
-  margin-bottom: 30px;
 }
 
 #bouton_valid_form {
@@ -435,16 +519,29 @@ fieldset {
   top: 5%;
   left: 10%;
   background-color: white;
-  border: 2px solid black;
+  border: 2px solid violet;
+  border-radius: 30px;
+  box-shadow: 2px 2px 12px grey;
 }
 #divPopUp #h4 {
-  font-size: 1.3em;
+  font-size: 2em;
   text-align: center;
   padding: 30px 0;
-  border-bottom: 1px solid black;
+  margin-top: 0;
+  border-bottom: 4px solid violet;
 }
 #divPopUp #divForm {
   overflow: scroll;
+  align-items: center;
+}
+#divPopUp #divForm #form {
+  width: 80%;
+}
+#divPopUp #divForm #form #fieldset {
+  border: none;
+}
+#divPopUp #divForm #form #fieldset legende {
+  font-size: 1.3em;
 }
 #divPopUp #divForm #form #fieldset .divForm {
   display: flex;
@@ -459,16 +556,44 @@ fieldset {
   padding-left: 10px;
 }
 #divPopUp #divForm #form #divRecap {
-  border: 1px solid black;
   flex-grow: 1;
+  margin: 0;
+  border-radius: 30px;
+  margin-bottom: 20px;
+  border: 4px solid violet;
 }
 #divPopUp #divForm #form #divRecap h5 {
   margin: 0 20px;
-  border-right: 2px solid black;
+  border-right: 3px double violet;
   padding: 20px;
+  font-size: 1.5em;
+  padding-top: 27px;
 }
 #divPopUp #divForm #form #divRecap #divRecapElm {
   flex-grow: 1;
+  font-size: 1.2em;
+}
+#divPopUp #divForm #form #divButton {
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+}
+#divPopUp #divForm #form #divButton #buttonEnvoyerCommande {
+  margin-right: 20px;
+  width: 290px;
+  border-radius: 20px;
+  padding: 9px;
+}
+#divPopUp #divForm #form #divButton #buttonEnvoyerCommande a {
+  text-decoration: none;
+}
+#divPopUp #divForm #form #divButton #buttonEnvoyerCommande a:hover {
+  color: white;
+}
+#divPopUp #divForm #form #divButton #annulerFormulaire {
+  margin-left: 20px;
+  border-radius: 20px;
+  padding: 9px;
 }
 
 /*# sourceMappingURL=style.css.map */

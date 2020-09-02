@@ -43,6 +43,7 @@ ajaxGet("http://localhost:3000/api/teddies/"+recherche, function (reponse) {
     div6.className = 'row';
     var bouttonAjouterAuPanier = document.createElement('button');
     bouttonAjouterAuPanier.className = "plusDinfo";
+    bouttonAjouterAuPanier.id = "bouttonAjouterAu Panier";
     bouttonAjouterAuPanier.textContent = "Ajouter au panier";
     var bouttonContinuerMesAchats = document.createElement('a');
     bouttonContinuerMesAchats.href = "../../index.html";
@@ -80,19 +81,22 @@ ajaxGet("http://localhost:3000/api/teddies/"+recherche, function (reponse) {
     span.textContent = table.price/100 + " €";
     description.textContent = table.description;
 
+    //affichage des couleurs pour chaque ours
     for (var i = 0; i < table.colors.length; i++) {
         var creer = document.createElement('option');
         creer.textContent = table.colors[i];
         select.appendChild(creer);
-        }
+    }
 
+    //preparation au stockage des ours dans le storage
     var locGet =[];
-
     if (localStorage.getItem('ours')) {
         locGet = JSON.parse(localStorage.getItem('ours'));
     }
 
-    bouttonAjouterAuPanier.addEventListener('click', function () {  
+    //au clic sur le boutton ajouter au panier je crée mon ours et je sauvegarde dans le storage
+    bouttonAjouterAuPanier.addEventListener('click', function (e) {
+
         class oursPanier {
             constructor(id, nomTeddy, image, quantite, prix, coul ) {
                 this.id = table._id;
@@ -105,69 +109,66 @@ ajaxGet("http://localhost:3000/api/teddies/"+recherche, function (reponse) {
         }   
         var nouveauPanier = new oursPanier();
 
+        //popup alert si la couleur et pas selectionner 
         if (nouveauPanier.coul === '--Choisir la couleur--') {
-            popUp(); 
+            popUp();
             buttonOk.addEventListener('click', function () {
                 divPopUpAlert.remove(divPopUpAlert);
-
             });
             return;
         }
-        // je parcour mon tableau  
         let ajout = true;
         locGet.forEach(function (e) {
+            //si mon ours et deja dans mon panier j'ajoute ou pas la quantite dans mon panier 
             if (e.id === nouveauPanier.id && e.coul === nouveauPanier.coul) {
-
-                if (confirm()) {
+                ajout = false;
+                popUpConfirm();
+                paraConfirm.textContent = "Vous avez déja " + e.quantite + " produits du même type dans votre panier. Voulez vous que nous ajoutions cette quantitée aux produits ? ";
+                document.getElementById('buttonOkConfirm').addEventListener('click', function () {
                     e.quantite = parseInt(e.quantite) + parseInt(nouveauPanier.quantite);
                     nouveauPanier = e;
-                    locGet.splice(locGet.indexOf(e), 1);
-                } else {
+                    localStorage.setItem('ours', JSON.stringify(locGet));
+                    divPopUpConfirm.remove(divPopUpConfirm);
+                });
+                document.getElementById('buttonAnnulerConfirm').addEventListener('click', function () {
+                    divPopUpConfirm.remove(divPopUpConfirm);
                     ajout = false;
-                }
-            } 
+                });
+            }
         });
+        //j'ajoute mon ours dans mon panier et dans le local  
         if (ajout) {
             locGet.push(nouveauPanier);
             localStorage.setItem('ours', JSON.stringify(locGet));
+            //permet de scale la quantite panier lors de l'ajout 
+            function scale() {
+                const recupAjoutPanier = document.getElementById('ajoutPanier');
+                recupAjoutPanier.style.animationDuration = '500ms';
+                recupAjoutPanier.style.animationName = 'panier';
+                setTimeout(function () {
+                    recupAjoutPanier.style.animationDuration = '0';
+                    recupAjoutPanier.style.animationName = 'none';
+                }, 500);
+            }
+            scale();
         }
         const recupLocal = JSON.parse(localStorage.getItem('ours'));
 
+      
+        //j'affiche ou pas la quantite dans mon panier
         function ajoutPanier() {
-            var recupAjoutPanier = document.getElementById('ajoutPanier');
-            var ajoutPanier = document.getElementById('ajoutPanier');
+            const recupAjoutPanier = document.getElementById('ajoutPanier');
             if (recupLocal.length === 0) {
                 recupAjoutPanier.style.opacity = '0';
             } else {
                 recupAjoutPanier.style.opacity = '1';
-                ajoutPanier.textContent = recupLocal.length;
+                recupAjoutPanier.textContent = recupLocal.length;
             }
         }
         ajoutPanier();
     });
 });
 
-/*class addPopUp {
-    constructor(main, divContainer, para, buttonOk,buttonAnnuler) {
-        this.main = document.querySelector('main');
-        this.divPopUp = document.createElement('div');
-        this.para = document.createElement('p');
-        this.buttonOk = document.createElement('button');
-        this.buttonAnnuler = document.createElement('button');
-    }
-    popUpAlert() {
-        divPopUp.id = "divPopUpAlert";
-        para.id = "paraAlert";
-        para.textContent = 'Oups !!! vous devez choisir une couleur';
-        buttonOk.id = 'buttonOk';
-        buttonOk.className = 'plusDinfo';
-        buttonOk.textContent = 'Ok j\'y remidie';
-
-        main.appendChild(divPopUp);
-        divPopUp.appendChild(paraAlert);
-        divPopUp.appendChild(buttonOk);
-    }
-}*/
 
 function popUp() {
     const main = document.querySelector('main');
@@ -179,7 +180,7 @@ function popUp() {
     const buttonOk = document.createElement('button');
     buttonOk.id = 'buttonOk';
     buttonOk.className = 'plusDinfo';
-    buttonOk.textContent = 'Ok j\'y remidie';
+    buttonOk.textContent = 'Ok j\'y remedie';
 
     main.appendChild(divPopUp);
     divPopUp.appendChild(paraAlert);
@@ -189,23 +190,23 @@ function popUpConfirm() {
     const main = document.querySelector('main');
     const divPopUp = document.createElement('div');
     divPopUp.id = "divPopUpConfirm";
-    const paraAlert = document.createElement('p');
+    const paraConfirm = document.createElement('p');
     paraConfirm.id = "paraConfirm";
-    paraConform.textContent = "Vous aver déja " + e.quantite + " produits du même type dans votre panier. Voulez vous que nous ajoutions cette quantite aux produits ?";
+    paraConfirm.textContent = "";
     const divBoutton = document.createElement('div');
     divBoutton.id = "divBoutton";
-    const buttonOkConfirrm = document.createElement('button');
-    buttonOkConfirm.id = 'buttonOk';
+    const buttonOkConfirm = document.createElement('button');
+    buttonOkConfirm.id = 'buttonOkConfirm';
     buttonOkConfirm.className = 'plusDinfo';
-    buttonOkConfirm.textContent = 'Ok j\'y remidie';
+    buttonOkConfirm.textContent = 'Oui bien sur';
     const buttonAnnulerConfirm = document.createElement('button');
-    buttonAnnulerConfirm.id = 'buttonAnnuler';
+    buttonAnnulerConfirm.id = 'buttonAnnulerConfirm';
     buttonAnnulerConfirm.className = 'plusDinfo';
-    buttonAnnulerConfirm.textContent = 'Annuler';
+    buttonAnnulerConfirm.textContent = 'Oh que non';
 
     main.appendChild(divPopUp);
-    divPopUp.appendChild(paraAlert);
+    divPopUp.appendChild(paraConfirm);
     divPopUp.appendChild(divBoutton);
-    divBoutton.appendChild(buttonOk);
-    divBoutton.appendChild(buttonAnnuler);
+    divBoutton.appendChild(buttonOkConfirm);
+    divBoutton.appendChild(buttonAnnulerConfirm);
 }

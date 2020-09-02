@@ -1,7 +1,9 @@
 ﻿let recupStorage = JSON.parse(localStorage.getItem('retour'));
-
+console.log(recupStorage);
+console.log(recupStorage.orderId);
 const main = document.querySelector('main');
 main.id = 'mainPageConfirm';
+main.className = 'column';
 const h2 = document.createElement('h2');
 h2.id = 'h2PageConfirm';
 h2.textContent = 'Confirmation de commande';
@@ -46,23 +48,14 @@ montantTotalCommande.innerHTML = 'Pour un montant Total de <span id="total">' + 
 /* creation d'un page defil */
 const divPageDefil = document.createElement('div');
 divPageDefil.id = 'divPageDefil';
-divPageDefil.className = 'column';
+divPageDefil.className = 'row';
     /* Premier paragraphe */
 const divParaOrderSend = document.createElement('div');
 divParaOrderSend.id = 'divParaOrderSend';
 divParaOrderSend.className = 'carousel';
 const paraCommandeEnvoye = document.createElement('para');
 paraCommandeEnvoye.id = 'paraCommandeEnvoyé';
-paraCommandeEnvoye.textContent = 'Lorsque votre commande sera envoyé, ';
-const spanCommandeSend1 = document.createElement('span');
-spanCommandeSend1.id = 'spanCommandeSend';
-spanCommandeSend1.textContent = 'vous recevrez un mail ou sms';
-const paraOrderSend2 = document.createElement('p');
-paraOrderSend2.id = 'paraOrderSend2';
-paraOrderSend2.textContent = ' pour pouvoir recupérer votre commande';
-const spanOrderSend2 = document.createElement('span');
-spanOrderSend2.id = 'spanOrderSend2';
-spanOrderSend2.textContent = ' selon le choix d\'expedition. ';
+paraCommandeEnvoye.textContent = 'Lorsque votre commande sera envoyé,vous recevrez un mail ou sms pour pouvoir recupérer votre commande selon le choix d\'expedition.';
     /* Second paragraphe */
 const divParaQuestion = document.createElement('div');
 divParaQuestion.id = 'divParaQuestion';
@@ -89,29 +82,26 @@ divCommande.appendChild(montantTotalCommande);
 main.appendChild(divPageDefil);
 divPageDefil.appendChild(divParaOrderSend);
 divParaOrderSend.appendChild(paraCommandeEnvoye);
-divParaOrderSend.appendChild(spanCommandeSend1);
-divParaOrderSend.appendChild(paraOrderSend2);
-divParaOrderSend.appendChild(spanOrderSend2);
 divPageDefil.appendChild(divParaQuestion);
 divParaQuestion.appendChild(paraQuestion);
 divParaQuestion.appendChild(lienQuestion);
 
 localStorage.clear();
 
-/* création du carousel */
-class carousel {
-    constructor(element, options = {}){
-        this.element = element;
-        this.options = Object.assign({}, {
-            slideToScroll: 1,
-            slideVisible: 1
-        }, options);
-    }
-}
+/*defilement des articles*/
+var slideIndex = 0;
 
-document.addEventListener('DOMContentLoaded', function () {
-    new carousel(document.querySelector('.carousel'), {
-        //slideToScroll : 2,
-        slideVisible: 2
-    });
-});
+function diapo() {
+    const recupParaDiv = divPageDefil.querySelectorAll('div');
+
+    for (var i = 0; i < recupParaDiv.length; i++) {
+        recupParaDiv[i].style.display = "none";
+    }
+    slideIndex++;
+    if (slideIndex > recupParaDiv.length) {
+        slideIndex = 1;
+    }
+    recupParaDiv[slideIndex - 1].style.display = "block";
+    setTimeout(diapo, 5000);
+};
+diapo();
