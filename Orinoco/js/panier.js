@@ -48,9 +48,8 @@ main.id = 'mainPanier';
     buttonValiderPanier.textContent = 'Passer la commande';
 
     //creation des elements de reference 
-    const form = document.createElement('form');
+    const form = document.createElement('div');
     form.className = 'row mepForm';
-    form.method = 'post';
     const divFormu = document.createElement('div');
     divFormu.id = 'divFormu';
 
@@ -350,18 +349,18 @@ buttonValiderPanier.addEventListener('click', function (e) {
         const divButton = document.createElement('div');
         divButton.id = 'divButton';
         divButton.className = 'row';
-        const bouttonEnvoyerCommande = document.createElement('button');
+        const bouttonEnvoyerCommande = document.createElement('input');
+        bouttonEnvoyerCommande.type = 'submit';
         bouttonEnvoyerCommande.id = 'buttonEnvoyerCommande';
         bouttonEnvoyerCommande.className = 'plusDinfo';
         const lienConfirmation = document.createElement('a');
         lienConfirmation.href = 'retourConfirmation.html';
         lienConfirmation.textContent = 'Confirmer la commande';
 
-    bouttonEnvoyerCommande.addEventListener('click', function (e) {
-        const recupInput = fieldset.querySelectorAll('input.obligation');
+    form.addEventListener('submit', function (e) {
+        /*const recupInput = fieldset.querySelectorAll('input.obligation');
             recupInput.forEach(function (element) {
                 if (element.value === '') {
-                    console.log('test');
                     element.style.border = '2px solid red';
                     if (element.style.border === '2px solid red') {
                         const ajoutInfoRequired = document.createElement('p');
@@ -374,7 +373,7 @@ buttonValiderPanier.addEventListener('click', function (e) {
                 } else {
                     element.style.border = 'initial';
                 }
-            });
+            });*/
             /*creation de l'objet contact */
             class nouveauContact {
                 constructor(firstName, lastName, address, city, email) {
@@ -386,6 +385,7 @@ buttonValiderPanier.addEventListener('click', function (e) {
                     }
                 }
             var contactTest = new nouveauContact;
+
             /*creation du tableau d'id de produit dans le panier */
             var productsTest = [];
             recupLocal.forEach(function (e) {
@@ -403,7 +403,6 @@ buttonValiderPanier.addEventListener('click', function (e) {
                 let retour = localStorage.setItem('retour', res);
             }, envoi);
             let totalCommande = localStorage.setItem('total', prixTotal());
-
         });
     
         /*boutton annuler*/
@@ -458,7 +457,7 @@ buttonValiderPanier.addEventListener('click', function (e) {
 
 
 
-        function blurRequired() {
+        /*function blurRequired() {
             const recupInput = fieldset.querySelectorAll('input.obligation');
             recupInput.forEach(function (e) {
                 e.addEventListener('blur', function () {
@@ -474,5 +473,5 @@ buttonValiderPanier.addEventListener('click', function (e) {
                 });
             });
         }
-        blurRequired();
+        blurRequired();*/
     });

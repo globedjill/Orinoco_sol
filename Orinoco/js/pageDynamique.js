@@ -94,7 +94,7 @@ ajaxGet("http://localhost:3000/api/teddies/"+recherche, function (reponse) {
         locGet = JSON.parse(localStorage.getItem('ours'));
     }
 
-    //au clic sur le boutton ajouter au panier je crée mon ours et je sauvegarde dans le storage
+    /*au clic sur le boutton ajouter au panier je crée mon ours et je sauvegarde dans le storage*/
     bouttonAjouterAuPanier.addEventListener('click', function (e) {
 
         class oursPanier {
