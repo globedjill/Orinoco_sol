@@ -21,9 +21,9 @@ main.id = 'mainPanier';
         //ligne legende
     const divLegende = document.createElement('div');
     divLegende.className = 'row divLegende';
-    const divCheckSupr = document.createElement('div');// div 
+    const divCheckSupr = document.createElement('div');/* div */
     divCheckSupr.className = "row divCheckSupr";
-    const labelSupr = document.createElement('label');// label checkbox 
+    const labelSupr = document.createElement('label');/* label checkbox */
     labelSupr.className = 'labelSupr';
     labelSupr.name = 'supprim';
     labelSupr.textContent = 'Tous Sélectionner';
@@ -61,27 +61,26 @@ main.id = 'mainPanier';
     totalNumber.className = 'totalNumber';
     totalNumber.textContent = 'Total : ' + prixTotal();
 
-//je garde mon panier visible lors du scroll
-window.addEventListener('scroll', function () {
-    if (this.scrollY > 220) {
-        divVal.className = 'column divVal scroll';
-        divFormu.className ='divFormu';
+    //je garde mon panier visible lors du scroll
+    window.addEventListener('scroll', function () {
+        if (this.scrollY > 220) {
+            divVal.className = 'column divVal scroll';
+            divFormu.className ='divFormu';
 
-    } else if (this.scrollY <= 220) {
-        divVal.className = "column divVal";
-        divFormu.className = '';
-
-    }
-});
+        } else if (this.scrollY <= 220) {
+            divVal.className = "column divVal";
+            divFormu.className = '';
+        }
+    });
 
     //creation element panier vide 
     const pPanierVide = document.createElement('p');
     pPanierVide.textContent = 'Votre panier est vide';
 
-    //function creer element titre 
+    /*function creer element titre*/
     function creerElementTitre() {
         if (recupLocal.length != 0 ) {
-            //ajout des elements titre  
+            /*ajout des elements titre*/
             main.appendChild(titrePanier);
             main.appendChild(divLegende);
             divLegende.appendChild(divCheckSupr);
@@ -229,8 +228,7 @@ bouttonSuppression.addEventListener('click', function () {
     
     //passer la commande formulaire d'enregistrement 
     buttonValiderPanier.addEventListener('click', function (e) {
-        e.preventDefault();
-
+        e.preventDefault();     
         //creation des elements 
         const divPopUp = document.createElement('div');
         divPopUp.className = 'column';
@@ -260,27 +258,11 @@ bouttonSuppression.addEventListener('click', function () {
         labelNom.textContent = 'Nom ';
         labelNom.name = 'nom';
         const inputNom = document.createElement('input');
-        inputNom.className = 'required';
+        inputNom.className = 'obligation';
         inputNom.type = 'text';
         inputNom.name = 'nom';
         inputNom.maxLength = '20';
         inputNom.required = 'true';
-
-        function required() {
-            const requiredElement = document.getElementsByClassName('required');
-
-            for (var i = 0; i < requiredElement.length; i++) {
-                console.log('test');
-
-                i.required.addEventListener('blur', function () {
-                    if (i.value === '') {
-                        i.style.border = '2px solid red';
-                    } else {
-                        i.style.border = '1px solid black';
-                    }
-                });
-            }     
-        };
 
         /*Prénom*/
         const divPrenom = document.createElement('div');
@@ -289,13 +271,11 @@ bouttonSuppression.addEventListener('click', function () {
         labelPrenom.textContent = 'Prénom ';
         labelPrenom.name = 'prenom'
         const inputPrenom = document.createElement('input');
-        inputPrenom.className = 'required';
+        inputPrenom.className = 'obligation';
         inputPrenom.type = 'text';
         inputPrenom.name = 'prenom';
         inputPrenom.maxLength = '20';
         inputPrenom.required = 'true';
-
-        required();
 
         /*Adresse complete*/
         const legendeAdresse = document.createElement('legende');
@@ -317,6 +297,7 @@ bouttonSuppression.addEventListener('click', function () {
         inputAdresse.type = 'text';
         inputAdresse.name = 'adresse';
         inputAdresse.required = 'true';
+        inputAdresse.className = 'obligation';
         const divCpAdresse = document.createElement('div');
         divCpAdresse.className = 'row divForm';
         const cpLabelAdresse = document.createElement('label');
@@ -335,6 +316,7 @@ bouttonSuppression.addEventListener('click', function () {
         inputVille.type = 'text';
         inputVille.name = 'ville';
         inputVille.required = 'true';
+        inputVille.className = 'obligation';
 
         //tel et mail 
         const legendeMail = document.createElement('legende');
@@ -348,6 +330,7 @@ bouttonSuppression.addEventListener('click', function () {
         inputMail.name = 'mail';
         inputMail.type = 'mail';
         inputMail.required = 'true';
+        inputMail.className = 'obligation';
        
         //recap
         const divRecap = document.createElement('div');
@@ -376,8 +359,14 @@ bouttonSuppression.addEventListener('click', function () {
 
         bouttonEnvoyerCommande.addEventListener('click', function (e) {
 
-           
-            e.preventDefault();
+            const recupInput = fieldset.querySelectorAll('input.obligation');
+            recupInput.forEach(function (element) {
+                if (element.style.border === '2px solid red') {
+                    alert('Veillez remplir le formulaire');
+                    e.preventDefault();
+                }
+            });
+
             /*creation de l'objet contact */
             class nouveauContact {
                 constructor(firstName, lastName, address, city, email) {
@@ -386,16 +375,8 @@ bouttonSuppression.addEventListener('click', function () {
                     this.address = inputAdresse.value;
                     this.city = inputVille.value;
                     this.email = inputMail.value;
-                    if (this.firstName === "" || this.lastName === "" || this.address === "" || this.city === "" || this.email === "") {
-                        const recupDivForm = document.getElementsByClassName('divForm');
-                        for (let i = 0; i < recupDivForm.length; i++) {
-                            console.log('test');
-                            divForm.style.border = "2px solid red";
-                        }
-                        
                     }
                 }
-            }
             var contactTest = new nouveauContact;
             /*creation du tableau d'id de produit dans le panier */
             var productsTest = [];
@@ -466,4 +447,20 @@ bouttonSuppression.addEventListener('click', function () {
         fieldset.appendChild(divMail);
         divMail.appendChild(labelMail);
         divMail.appendChild(inputMail);
+
+
+
+        function blurRequired() {
+            const recupInput = fieldset.querySelectorAll('input.obligation');
+            recupInput.forEach(function (e) {
+                e.addEventListener('blur', function () {
+                    if (e.value === "") {
+                        e.style.border = '2px solid red';
+                    } else {
+                        e.style.border = '1px solid black';
+                    }
+                });
+            });
+        }
+        blurRequired();
     });
