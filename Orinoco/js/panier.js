@@ -226,10 +226,10 @@ bouttonSuppression.addEventListener('click', function () {
 });        
 
     
-    //passer la commande formulaire d'enregistrement 
-    buttonValiderPanier.addEventListener('click', function (e) {
-        e.preventDefault();     
-        //creation des elements 
+    /*passer la commande formulaire d'enregistrement */
+buttonValiderPanier.addEventListener('click', function (e) {
+    e.preventDefault();
+        /*creation des elements*/
         const divPopUp = document.createElement('div');
         divPopUp.className = 'column';
         divPopUp.id = 'divPopUp';
@@ -251,7 +251,7 @@ bouttonSuppression.addEventListener('click', function () {
         legende.textContent = 'Coordonnées';
         legende.id = 'legende';
 
-        //nom 
+        /*nom*/ 
         const divNom = document.createElement('div');
         divNom.className = 'row divForm';
         const labelNom = document.createElement('label');
@@ -262,7 +262,7 @@ bouttonSuppression.addEventListener('click', function () {
         inputNom.type = 'text';
         inputNom.name = 'nom';
         inputNom.maxLength = '20';
-        inputNom.required = 'true';
+        inputNom.required = 'required';
 
         /*Prénom*/
         const divPrenom = document.createElement('div');
@@ -275,7 +275,7 @@ bouttonSuppression.addEventListener('click', function () {
         inputPrenom.type = 'text';
         inputPrenom.name = 'prenom';
         inputPrenom.maxLength = '20';
-        inputPrenom.required = 'true';
+        inputPrenom.required = 'required';
 
         /*Adresse complete*/
         const legendeAdresse = document.createElement('legende');
@@ -357,16 +357,24 @@ bouttonSuppression.addEventListener('click', function () {
         lienConfirmation.href = 'retourConfirmation.html';
         lienConfirmation.textContent = 'Confirmer la commande';
 
-        bouttonEnvoyerCommande.addEventListener('click', function (e) {
-
-            const recupInput = fieldset.querySelectorAll('input.obligation');
+    bouttonEnvoyerCommande.addEventListener('click', function (e) {
+        const recupInput = fieldset.querySelectorAll('input.obligation');
             recupInput.forEach(function (element) {
-                if (element.style.border === '2px solid red') {
-                    alert('Veillez remplir le formulaire');
-                    e.preventDefault();
+                if (element.value === '') {
+                    console.log('test');
+                    element.style.border = '2px solid red';
+                    if (element.style.border === '2px solid red') {
+                        const ajoutInfoRequired = document.createElement('p');
+                        ajoutInfoRequired.textContent = 'Veillez remplir la case';
+                        ajoutInfoRequired.style.color = 'red';
+                        ajoutInfoRequired.id = 'pRequired';
+                        element.parentNode.appendChild(ajoutInfoRequired);
+                        e.preventDefault();
+                    }  
+                } else {
+                    element.style.border = 'initial';
                 }
             });
-
             /*creation de l'objet contact */
             class nouveauContact {
                 constructor(firstName, lastName, address, city, email) {
@@ -457,6 +465,10 @@ bouttonSuppression.addEventListener('click', function () {
                     if (e.value === "") {
                         e.style.border = '2px solid red';
                     } else {
+                        if (e.style.border === '2px solid red') {
+                            const recupPrequired = document.getElementById('pRequired');
+                            e.parentNode.removeChild(recupPrequired);
+                        }
                         e.style.border = '1px solid black';
                     }
                 });

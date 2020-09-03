@@ -1,6 +1,4 @@
 ﻿let recupStorage = JSON.parse(localStorage.getItem('retour'));
-console.log(recupStorage);
-console.log(recupStorage.orderId);
 const main = document.querySelector('main');
 main.id = 'mainPageConfirm';
 main.className = 'column';
