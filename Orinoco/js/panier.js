@@ -362,7 +362,8 @@ buttonValiderPanier.addEventListener('click', function (e) {
         const bouttonEnvoyerCommande = document.createElement('input');
         bouttonEnvoyerCommande.type = 'submit';
         bouttonEnvoyerCommande.id = 'buttonEnvoyerCommande';
-        bouttonEnvoyerCommande.className = 'plusDinfo';
+    bouttonEnvoyerCommande.className = 'plusDinfo';
+    bouttonEnvoyerCommande.value = "Envoyer la commande";
         const lienConfirmation = document.createElement('a');
         lienConfirmation.href = 'http://retourConfirmation.html';
         lienConfirmation.textContent = 'Confirmer la commande';
