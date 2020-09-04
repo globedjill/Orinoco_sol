@@ -72,10 +72,12 @@ main.id = 'mainPanier';
         }
     });
 
-    //creation element panier vide 
-    const pPanierVide = document.createElement('p');
-    pPanierVide.textContent = 'Votre panier est vide';
-
+    //creation element panier vide
+    function panierVide() {
+        const pPanierVide = document.createElement('p');
+        pPanierVide.textContent = 'Votre panier est vide';
+        main.appendChild(pPanierVide);
+    }
     /*function creer element titre*/
     function creerElementTitre() {
         if (recupLocal.length != 0 ) {
@@ -92,7 +94,7 @@ main.id = 'mainPanier';
             main.appendChild(form);
             
         } else {
-            main.appendChild(pPanierVide);
+            panierVide();  
         }
     }
     creerElementTitre();
@@ -142,13 +144,13 @@ main.id = 'mainPanier';
             sousTotal.id = 'sousTotal';
             sousTotal.textContent = (recupPrix * qttVal) + " €";
 
-            //fonction changer total
+            /*fonction changer total*/
             quantiteType.addEventListener('input', function () {
                 qttVal = quantiteType.value;
                 element.quantite = qttVal;
                 sousTotal.textContent = (recupPrix * qttVal) + " €";
                 totalNumber.textContent = 'Total : ' + prixTotal();
-            })
+            });
 
             //Ajout des elements
             form.appendChild(divFormu);
@@ -197,34 +199,38 @@ supprimer.addEventListener('click', function () {
         }
     });
 
-//function suppression des elements
-const recupArticle = document.querySelectorAll('article');
-
+//function suppression des articles
 bouttonSuppression.addEventListener('click', function () {
-    //fonction suppression article
+    const recupArticle = document.querySelectorAll('article');
+
     recupArticle.forEach(function (e) {
         let recupChecked = e.childNodes[0].checked;
+        const recupQtt = e.childNodes[2].childNodes[0].childNodes[1].textContent;
         if (recupChecked === true) {
             e.remove(e);
-
-        for (var i = 0; i < recupLocal.length; i++) {
-
-                let recupIdArticleLocal = recupLocal[i];
+            recupLocal.forEach(function (element) {
+                let recupQttLocal = "Couleur : " + element.coul;
+                let recupIdLocal = element.id
                
-                if (e.id === recupIdArticleLocal.id) {
-                   recupLocal.splice(recupIdArticleLocal, 1);
-
-                var ajoutPanier = document.getElementById('ajoutPanier');                    
-                ajoutPanier.textContent = recupLocal.length;
-                totalNumber.textContent = "Total : " + prixTotal();
+                if (e.id === recupIdLocal && recupQttLocal === recupQtt) {
+                    recupLocal.splice(element, 1);
+                    var ajoutPanier = document.getElementById('ajoutPanier');
+                    ajoutPanier.textContent = recupLocal.length;
+                    totalNumber.textContent = "Total : " + prixTotal();
                 }
-            };
+            });
         }
+        localStorage.setItem('ours', JSON.stringify(recupLocal));
     });
-    localStorage.setItem('ours', JSON.stringify(recupLocal));
+    if (recupLocal.length === 0) {
+        main.removeChild(divLegende);
+        main.removeChild(titrePanier);
+        form.removeChild(divVal);
+        panierVide();
+    }
 });        
 
-    
+
     /*passer la commande formulaire d'enregistrement */
 buttonValiderPanier.addEventListener('click', function (e) {
     e.preventDefault();
@@ -349,15 +355,21 @@ buttonValiderPanier.addEventListener('click', function (e) {
         const divButton = document.createElement('div');
         divButton.id = 'divButton';
         divButton.className = 'row';
+
+        const boutValider = document.createElement('button');
+        boutValider.id = 'boutValider';
+        boutValider.className = 'plusDinfo';
         const bouttonEnvoyerCommande = document.createElement('input');
         bouttonEnvoyerCommande.type = 'submit';
         bouttonEnvoyerCommande.id = 'buttonEnvoyerCommande';
         bouttonEnvoyerCommande.className = 'plusDinfo';
         const lienConfirmation = document.createElement('a');
-        lienConfirmation.href = 'retourConfirmation.html';
+        lienConfirmation.href = 'http://retourConfirmation.html';
         lienConfirmation.textContent = 'Confirmer la commande';
 
     form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        window.location = "retourConfirmation.html";
         /*const recupInput = fieldset.querySelectorAll('input.obligation');
             recupInput.forEach(function (element) {
                 if (element.value === '') {
@@ -374,6 +386,7 @@ buttonValiderPanier.addEventListener('click', function (e) {
                     element.style.border = 'initial';
                 }
             });*/
+            
             /*creation de l'objet contact */
             class nouveauContact {
                 constructor(firstName, lastName, address, city, email) {
@@ -402,7 +415,7 @@ buttonValiderPanier.addEventListener('click', function (e) {
             ajaxPost("http://localhost:3000/api/teddies/order", function (res) {
                 let retour = localStorage.setItem('retour', res);
             }, envoi);
-            let totalCommande = localStorage.setItem('total', prixTotal());
+        let totalCommande = localStorage.setItem('total', prixTotal());
         });
     
         /*boutton annuler*/
@@ -473,5 +486,6 @@ buttonValiderPanier.addEventListener('click', function (e) {
                 });
             });
         }
-        blurRequired();*/
+        blurRequired();
+        */
     });

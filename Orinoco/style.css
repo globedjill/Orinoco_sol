@@ -501,6 +501,9 @@ form #mepForm {
   display: flex;
   flex-direction: row;
 }
+form textarea {
+  height: 200px;
+}
 
 fieldset {
   padding: 30px;

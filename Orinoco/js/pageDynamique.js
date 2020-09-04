@@ -1,4 +1,4 @@
-﻿//recuperation et affichage des ours  
+﻿/*recuperation et affichage des ours*/
 const regex = /\?/;
 var recherche = window.location.search.replace(regex, "");
 
@@ -109,7 +109,7 @@ ajaxGet("http://localhost:3000/api/teddies/"+recherche, function (reponse) {
         }   
         var nouveauPanier = new oursPanier();
 
-        //popup alert si la couleur et pas selectionner 
+        /*popup alert si la couleur et pas selectionner*/
         if (nouveauPanier.coul === '--Choisir la couleur--') {
             popUp();
             buttonOk.addEventListener('click', function () {
@@ -136,7 +136,7 @@ ajaxGet("http://localhost:3000/api/teddies/"+recherche, function (reponse) {
                 });
             }
         });
-        //j'ajoute mon ours dans mon panier et dans le local  
+        /*j'ajoute mon ours dans mon panier et dans le local*/
         if (ajout) {
             locGet.push(nouveauPanier);
             localStorage.setItem('ours', JSON.stringify(locGet));
