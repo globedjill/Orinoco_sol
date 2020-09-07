@@ -81,14 +81,14 @@ ajaxGet("http://localhost:3000/api/teddies/"+recherche, function (reponse) {
     span.textContent = table.price/100 + " €";
     description.textContent = table.description;
 
-    //affichage des couleurs pour chaque ours
+    /*affichage des couleurs pour chaque ours*/
     for (var i = 0; i < table.colors.length; i++) {
         var creer = document.createElement('option');
         creer.textContent = table.colors[i];
         select.appendChild(creer);
     }
 
-    //preparation au stockage des ours dans le storage
+    /*preparation au stockage des ours dans le storage*/
     var locGet =[];
     if (localStorage.getItem('ours')) {
         locGet = JSON.parse(localStorage.getItem('ours'));
@@ -112,26 +112,43 @@ ajaxGet("http://localhost:3000/api/teddies/"+recherche, function (reponse) {
         /*popup alert si la couleur et pas selectionner*/
         if (nouveauPanier.coul === '--Choisir la couleur--') {
             popUp();
+            bouttonAjouterAuPanier.style.display = 'none';
             buttonOk.addEventListener('click', function () {
+                bouttonAjouterAuPanier.style.display = 'initial';
                 divPopUpAlert.remove(divPopUpAlert);
             });
             return;
         }
+
+        /*PopUp alert si la quantité supérieur à dix*/
+        if (nouveauPanier.quantite > 10) {
+            popUpQtt();
+            bouttonAjouterAuPanier.style.display = 'none';
+            buttonOk.addEventListener('click', function () {
+                bouttonAjouterAuPanier.style.display = 'initial';
+                divPopUpAlert.remove(divPopUpAlert);
+            });
+            return;
+        }
+
         let ajout = true;
         locGet.forEach(function (e) {
             //si mon ours et deja dans mon panier j'ajoute ou pas la quantite dans mon panier 
             if (e.id === nouveauPanier.id && e.coul === nouveauPanier.coul) {
                 ajout = false;
                 popUpConfirm();
+                bouttonAjouterAuPanier.style.display = 'none';
                 paraConfirm.textContent = "Vous avez déja " + e.quantite + " produits du même type dans votre panier. Voulez vous que nous ajoutions cette quantitée aux produits ? ";
                 document.getElementById('buttonOkConfirm').addEventListener('click', function () {
                     e.quantite = parseInt(e.quantite) + parseInt(nouveauPanier.quantite);
                     nouveauPanier = e;
                     localStorage.setItem('ours', JSON.stringify(locGet));
                     divPopUpConfirm.remove(divPopUpConfirm);
+                    bouttonAjouterAuPanier.style.display = 'initial';
                 });
                 document.getElementById('buttonAnnulerConfirm').addEventListener('click', function () {
                     divPopUpConfirm.remove(divPopUpConfirm);
+                    bouttonAjouterAuPanier.style.display = 'initial';s
                     ajout = false;
                 });
             }
@@ -140,7 +157,7 @@ ajaxGet("http://localhost:3000/api/teddies/"+recherche, function (reponse) {
         if (ajout) {
             locGet.push(nouveauPanier);
             localStorage.setItem('ours', JSON.stringify(locGet));
-            //permet de scale la quantite panier lors de l'ajout 
+            /*permet de scale la quantite panier lors de l'ajout */
             function scale() {
                 const recupAjoutPanier = document.getElementById('ajoutPanier');
                 recupAjoutPanier.style.animationDuration = '500ms';
@@ -155,7 +172,7 @@ ajaxGet("http://localhost:3000/api/teddies/"+recherche, function (reponse) {
         const recupLocal = JSON.parse(localStorage.getItem('ours'));
 
       
-        //j'affiche ou pas la quantite dans mon panier
+        /*j'affiche ou pas la quantite dans mon panier*/
         function ajoutPanier() {
             const recupAjoutPanier = document.getElementById('ajoutPanier');
             if (recupLocal.length === 0) {
@@ -177,6 +194,22 @@ function popUp() {
     const paraAlert = document.createElement('p');
     paraAlert.id = "paraAlert";
     paraAlert.textContent = 'Oups !!! vous devez choisir une couleur';
+    const buttonOk = document.createElement('button');
+    buttonOk.id = 'buttonOk';
+    buttonOk.className = 'plusDinfo';
+    buttonOk.textContent = 'Ok j\'y remedie';
+
+    main.appendChild(divPopUp);
+    divPopUp.appendChild(paraAlert);
+    divPopUp.appendChild(buttonOk);
+}
+function popUpQtt(){
+    const main = document.querySelector('main');
+    const divPopUp = document.createElement('div');
+    divPopUp.id = "divPopUpAlert";
+    const paraAlert = document.createElement('p');
+    paraAlert.id = "paraAlert";
+    paraAlert.textContent = 'Vous ne pouvez pas commander plus de 10 article à la fois';
     const buttonOk = document.createElement('button');
     buttonOk.id = 'buttonOk';
     buttonOk.className = 'plusDinfo';

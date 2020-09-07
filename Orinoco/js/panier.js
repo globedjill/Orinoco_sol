@@ -1,5 +1,5 @@
-﻿//recuperation et affichage des ours
-        //fonction recuperation du prix total 
+﻿/*recuperation et affichage des ours*/
+        /*Fonction recuperation du prix total */
     function prixTotal() {
         const tablePrix = [0];
         if (recupLocal != 0) {
@@ -47,20 +47,20 @@ main.id = 'mainPanier';
     buttonValiderPanier.className = 'plusDinfo';
     buttonValiderPanier.textContent = 'Passer la commande';
 
-    //creation des elements de reference 
+    /*creation des elements de reference */bouttonSuppression
     const form = document.createElement('div');
     form.className = 'row mepForm';
     const divFormu = document.createElement('div');
     divFormu.id = 'divFormu';
 
-    //creation du total  
+    /*creation du total*/
     const divVal = document.createElement('div'); 
     divVal.className = 'column divVal';
     const totalNumber = document.createElement('p');
     totalNumber.className = 'totalNumber';
     totalNumber.textContent = 'Total : ' + prixTotal();
 
-    //je garde mon panier visible lors du scroll
+    /*je garde mon panier visible lors du scroll*/
     window.addEventListener('scroll', function () {
         if (this.scrollY > 220) {
             divVal.className = 'column divVal scroll';
@@ -72,7 +72,7 @@ main.id = 'mainPanier';
         }
     });
 
-    //creation element panier vide
+    /*creation element panier vide*/
     function panierVide() {
         const pPanierVide = document.createElement('p');
         pPanierVide.textContent = 'Votre panier est vide';
@@ -175,7 +175,7 @@ main.id = 'mainPanier';
     }
 
 const recupBouttonSupprimer = document.getElementsByClassName('bouttonSupprPanier');
-    //fonction selection individuelle 
+    /*fonction selection individuelle */
 for (var i = 0; i < recupBouttonSupprimer.length; i++) {
     if ((recupBouttonSupprimer[i].checked === true) > 0) {
         labelSupr.textContent = 'Tous Déselectionner';
@@ -184,7 +184,7 @@ for (var i = 0; i < recupBouttonSupprimer.length; i++) {
     }
 }
 
-    //fonction tous selectionner a partir du boutton general     
+    //fonction tous selectionner à partir du boutton general     
 supprimer.addEventListener('click', function () {
         if (supprimer.checked === true) {
             labelSupr.textContent = 'Tous Déselectionner';
@@ -197,9 +197,11 @@ supprimer.addEventListener('click', function () {
                     recupBouttonSupprimer[i].checked = false;
                 }
         }
-    });
+});
 
-//function suppression des articles
+
+
+/*function suppression des articles*/
 bouttonSuppression.addEventListener('click', function () {
     const recupArticle = document.querySelectorAll('article');
 
@@ -211,7 +213,7 @@ bouttonSuppression.addEventListener('click', function () {
             recupLocal.forEach(function (element) {
                 let recupQttLocal = "Couleur : " + element.coul;
                 let recupIdLocal = element.id
-               
+
                 if (e.id === recupIdLocal && recupQttLocal === recupQtt) {
                     recupLocal.splice(element, 1);
                     var ajoutPanier = document.getElementById('ajoutPanier');
@@ -219,7 +221,7 @@ bouttonSuppression.addEventListener('click', function () {
                     totalNumber.textContent = "Total : " + prixTotal();
                 }
             });
-        }
+        } 
         localStorage.setItem('ours', JSON.stringify(recupLocal));
     });
     if (recupLocal.length === 0) {
@@ -230,9 +232,9 @@ bouttonSuppression.addEventListener('click', function () {
     }
 });        
 
-
     /*passer la commande formulaire d'enregistrement */
 buttonValiderPanier.addEventListener('click', function (e) {
+    buttonValiderPanier.style.display = 'none';
     e.preventDefault();
         /*creation des elements*/
         const divPopUp = document.createElement('div');
@@ -285,7 +287,7 @@ buttonValiderPanier.addEventListener('click', function (e) {
         /*Adresse complete*/
         const legendeAdresse = document.createElement('legende');
         legendeAdresse.textContent = 'Adresse';
-        const divNumAdresse = document.createElement('div');
+        const divNumAdresse = document.createElement('div');/*numero*/
         divNumAdresse.className = 'row divForm';
         const numLabelAdresse = document.createElement('label');
         numLabelAdresse.textContent = 'N°';
@@ -293,7 +295,7 @@ buttonValiderPanier.addEventListener('click', function (e) {
         const numInputAdresse = document.createElement('input');
         numInputAdresse.type = 'number';
         numInputAdresse.name = 'num';
-        const divAdresse = document.createElement('div');
+        const divAdresse = document.createElement('div');/*Nom de la rue*/
         divAdresse.className = 'row divForm';
         const labelAdresse = document.createElement('label');
         labelAdresse.textContent = 'Nom de la rue ';
@@ -303,7 +305,7 @@ buttonValiderPanier.addEventListener('click', function (e) {
         inputAdresse.name = 'adresse';
         inputAdresse.required = 'true';
         inputAdresse.className = 'obligation';
-        const divCpAdresse = document.createElement('div');
+        const divCpAdresse = document.createElement('div');/*Cope postal*/
         divCpAdresse.className = 'row divForm';
         const cpLabelAdresse = document.createElement('label');
         cpLabelAdresse.textContent = 'Code Postale';
@@ -312,7 +314,7 @@ buttonValiderPanier.addEventListener('click', function (e) {
         cpInputAdresse.type = 'number';
         cpInputAdresse.name = 'cp';
         cpInputAdresse.required = 'true';
-        const divVille = document.createElement('div');
+        const divVille = document.createElement('div');/*ville*/
         divVille.className = 'row divForm';
         const labelVille = document.createElement('label');
         labelVille.textContent = 'Ville ';
@@ -323,7 +325,7 @@ buttonValiderPanier.addEventListener('click', function (e) {
         inputVille.required = 'true';
         inputVille.className = 'obligation';
 
-        //tel et mail 
+        /*mail*/ 
         const legendeMail = document.createElement('legende');
         legendeMail.textContent = 'Vous contacter';
         const divMail = document.createElement('div');
@@ -351,7 +353,7 @@ buttonValiderPanier.addEventListener('click', function (e) {
         const paraRecupTotal = document.createElement('p');
         paraRecupTotal.textContent = 'Pour un Total TTc de : ' + prixTotal();
 
-        //boutton envoyer la commande et attente de la confirmation 
+        /*boutton envoyer la commande et attente de la confirmation */
         const divButton = document.createElement('div');
         divButton.id = 'divButton';
         divButton.className = 'row';
@@ -362,31 +364,12 @@ buttonValiderPanier.addEventListener('click', function (e) {
         const bouttonEnvoyerCommande = document.createElement('input');
         bouttonEnvoyerCommande.type = 'submit';
         bouttonEnvoyerCommande.id = 'buttonEnvoyerCommande';
-    bouttonEnvoyerCommande.className = 'plusDinfo';
-    bouttonEnvoyerCommande.value = "Envoyer la commande";
-        const lienConfirmation = document.createElement('a');
-        lienConfirmation.href = 'http://retourConfirmation.html';
-        lienConfirmation.textContent = 'Confirmer la commande';
-
-    form.addEventListener('submit', function (e) {
+        bouttonEnvoyerCommande.className = 'plusDinfo';
+        bouttonEnvoyerCommande.value = "Envoyer la commande";
+        
+        form.addEventListener('submit', function (e) {
         e.preventDefault();
         window.location = "retourConfirmation.html";
-        /*const recupInput = fieldset.querySelectorAll('input.obligation');
-            recupInput.forEach(function (element) {
-                if (element.value === '') {
-                    element.style.border = '2px solid red';
-                    if (element.style.border === '2px solid red') {
-                        const ajoutInfoRequired = document.createElement('p');
-                        ajoutInfoRequired.textContent = 'Veillez remplir la case';
-                        ajoutInfoRequired.style.color = 'red';
-                        ajoutInfoRequired.id = 'pRequired';
-                        element.parentNode.appendChild(ajoutInfoRequired);
-                        e.preventDefault();
-                    }  
-                } else {
-                    element.style.border = 'initial';
-                }
-            });*/
             
             /*creation de l'objet contact */
             class nouveauContact {
@@ -404,7 +387,7 @@ buttonValiderPanier.addEventListener('click', function (e) {
             var productsTest = [];
             recupLocal.forEach(function (e) {
                 productsTest.push(e.id);
-            });
+                });
             class tableRecap {
                 constructor(contact, products , total) {
                     this.contact = contactTest;
@@ -425,7 +408,8 @@ buttonValiderPanier.addEventListener('click', function (e) {
         bouttonAnnulerFormulaire.id = 'annulerFormulaire';
         bouttonAnnulerFormulaire.className = 'plusDinfo';
 
-        bouttonAnnulerFormulaire.addEventListener('click', function () {
+    bouttonAnnulerFormulaire.addEventListener('click', function () {
+        buttonValiderPanier.style.display = 'initial';
             divPopUp.remove(divPopUp);
         });
 
@@ -441,7 +425,6 @@ buttonValiderPanier.addEventListener('click', function (e) {
         divRecapElm.appendChild(paraRecupTotal);
         form.appendChild(divButton);
         divButton.appendChild(bouttonEnvoyerCommande);
-        bouttonEnvoyerCommande.appendChild(lienConfirmation);
         divButton .appendChild(bouttonAnnulerFormulaire);
         fieldset.appendChild(legende);
         fieldset.appendChild(divNom);
@@ -469,24 +452,5 @@ buttonValiderPanier.addEventListener('click', function (e) {
         divMail.appendChild(labelMail);
         divMail.appendChild(inputMail);
 
-
-
-        /*function blurRequired() {
-            const recupInput = fieldset.querySelectorAll('input.obligation');
-            recupInput.forEach(function (e) {
-                e.addEventListener('blur', function () {
-                    if (e.value === "") {
-                        e.style.border = '2px solid red';
-                    } else {
-                        if (e.style.border === '2px solid red') {
-                            const recupPrequired = document.getElementById('pRequired');
-                            e.parentNode.removeChild(recupPrequired);
-                        }
-                        e.style.border = '1px solid black';
-                    }
-                });
-            });
-        }
-        blurRequired();
-        */
     });
+

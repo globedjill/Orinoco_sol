@@ -1,4 +1,7 @@
-﻿let recupStorage = JSON.parse(localStorage.getItem('retour'));
+﻿/*Accée a la page de confirmation de commande*/
+let recupStorage = JSON.parse(localStorage.getItem('retour'));
+
+/*Création et accé à la page de confirmation*/
 const main = document.querySelector('main');
 main.id = 'mainPageConfirm';
 main.className = 'column';
@@ -43,7 +46,7 @@ const montantTotalCommande = document.createElement('p');
 montantTotalCommande.id = 'montantTotalCommande';
 montantTotalCommande.innerHTML = 'Pour un montant Total de <span id="total">' + localStorage.total + '</span>';
 
-/* creation d'un page defil */
+/* creation d'un slider */
 const divPageDefil = document.createElement('div');
 divPageDefil.id = 'divPageDefil';
 divPageDefil.className = 'row';
