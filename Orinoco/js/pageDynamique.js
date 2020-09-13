@@ -148,7 +148,7 @@ ajaxGet("http://localhost:3000/api/teddies/"+recherche, function (reponse) {
                 });
                 document.getElementById('buttonAnnulerConfirm').addEventListener('click', function () {
                     divPopUpConfirm.remove(divPopUpConfirm);
-                    bouttonAjouterAuPanier.style.display = 'initial';s
+                    bouttonAjouterAuPanier.style.display = 'initial';
                     ajout = false;
                 });
             }

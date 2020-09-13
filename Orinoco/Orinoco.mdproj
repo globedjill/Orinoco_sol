@@ -16,11 +16,8 @@
     <None Include="style.css" />
     <None Include="sass\layout\_class.scss" />
     <None Include="js\script.js" />
-    <None Include="html\ours.html" />
-    <None Include="sass\layout\_form.less" />
     <None Include="js\pageDynamique.js" />
     <None Include="html\pageProduit.html" />
-    <None Include="js\menuDeroulant.js" />
     <None Include="sass\utils\_keyframes.scss" />
     <None Include="js\panier.js" />
     <None Include="js\ajaxGet.js" />

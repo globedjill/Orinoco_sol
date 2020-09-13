@@ -42,6 +42,7 @@ if (recupStorage.products.length === 1) {
 } else {
     paraNbArticle.innerHTML = "Vous avez commander <span id='nbArticle'>" + recupStorage.products.length + "</span> articles.";
 }
+
 const montantTotalCommande = document.createElement('p');
 montantTotalCommande.id = 'montantTotalCommande';
 montantTotalCommande.innerHTML = 'Pour un montant Total de <span id="total">' + localStorage.total + '</span>';

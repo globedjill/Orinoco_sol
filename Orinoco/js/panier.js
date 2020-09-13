@@ -387,7 +387,8 @@ buttonValiderPanier.addEventListener('click', function (e) {
             var productsTest = [];
             recupLocal.forEach(function (e) {
                 productsTest.push(e.id);
-                });
+            });
+
             class tableRecap {
                 constructor(contact, products , total) {
                     this.contact = contactTest;
@@ -408,10 +409,10 @@ buttonValiderPanier.addEventListener('click', function (e) {
         bouttonAnnulerFormulaire.id = 'annulerFormulaire';
         bouttonAnnulerFormulaire.className = 'plusDinfo';
 
-    bouttonAnnulerFormulaire.addEventListener('click', function () {
-        buttonValiderPanier.style.display = 'initial';
-            divPopUp.remove(divPopUp);
-        });
+        bouttonAnnulerFormulaire.addEventListener('click', function () {
+            buttonValiderPanier.style.display = 'initial';
+                divPopUp.remove(divPopUp);
+            });
 
         main.appendChild(divPopUp);
         divPopUp.appendChild(h4);
